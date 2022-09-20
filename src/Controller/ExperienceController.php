@@ -3,21 +3,23 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class HomeController extends AbstractController
+class ExperienceController extends AbstractController
 {
-    #[Route(path: '/', name: 'index')]
     #[Route(
-        path: '/{_locale}',
-        name: 'home',
+        path: '/{_locale}/experience',
+        name: 'experience',
         requirements: [
             '_locale' => 'en|fr',
         ],
     )]
     public function index(): Response
     {
-        return $this->render('home/index.html.twig');
+        return $this->render('experience/index.html.twig', [
+            'controller_name' => 'ExperienceController',
+        ]);
     }
 }

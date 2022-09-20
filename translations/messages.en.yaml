@@ -1,0 +1,33 @@
+route:
+  index: Home
+  home: Home
+  contact: Contact us
+  about: Knowledge
+  experience: Experience
+  info_terms: Terms of use
+  info_gdpr: GDPR
+  info_plan: Site map
+site:
+  name: QS Consulting
+label:
+  rights: All rights reserved
+  essential: Essential
+  information: Information
+  name: Your fullname / society
+  email: Your email
+  subject: Select your message's subject
+  message: Your message
+  submit: Send
+contact:
+  subject_first: First subject
+  subject_second: Second subject
+  subject_third: Third subject
+placeholder:
+  name: Fill your fullname / society
+  email: Fill your email
+  subject: Select your message's subject
+  message: Fill your message
+notice:
+  submit:
+    good:
+      contact: Your message has been sent successfully !

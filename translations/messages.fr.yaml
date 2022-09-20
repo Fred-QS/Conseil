@@ -1,0 +1,33 @@
+route:
+  index: Accueil
+  home: Accueil
+  contact: Contactez-nous
+  about: Savoir-faire
+  experience: Expérience
+  info_terms: Conditions générales
+  info_gdpr: RGPD
+  info_plan: Plan du site
+site:
+  name: QS Conseil
+label:
+  rights: Tout droit réservé
+  essential: Essentiel
+  information: Informations
+  name: Votre nom / société
+  email: Votre email
+  subject: Choisir le sujet de votre message
+  message: Votre message
+  submit: Envoyer
+contact:
+  subject_first: Premier sujet
+  subject_second: Second sujet
+  subject_third: Troisième sujet
+placeholder:
+  name: Saisir votre nom / société
+  email: Saisir votre email
+  subject: Choisir le sujet de votre message
+  message: Saisir votre message
+notice:
+  submit:
+    good:
+      contact: Votre message a bien été envoyé !

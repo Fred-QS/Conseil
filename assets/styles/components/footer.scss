@@ -1,0 +1,44 @@
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 20px;
+}
+
+footer > div:not(#sub-footer) {
+  width: 33.33%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+#sub-footer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#sub-footer > small  {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-contact {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin: 10px 0;
+}
+
+.footer-society-name {
+  margin-bottom: 10px;
+}
+
+.footer-sub-society-name {
+  font-size: 0.7em;
+}

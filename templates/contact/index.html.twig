@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% set notices = app.flashes('notice') %}
+    {% if notices is not empty %}
+        {% for message in notices %}
+            <div class="alert alert-info">
+                {{ message|trans }}
+            </div>
+        {% endfor %}
+    {% else %}
+        <div>
+            {{ form(form) }}
+        </div>
+    {% endif %}
+{% endblock %}

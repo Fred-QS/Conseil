@@ -1,0 +1,84 @@
+<footer>
+    <div>
+        {% set society = society_data() %}
+        <ul>
+            <li class="footer-society-name">
+                <h4>
+                    {% if app.request.getLocale() == 'fr' %}
+                        {{ society.nameFr }}
+                    {% else %}
+                        {{ society.nameEn }}
+                    {% endif %}
+                </h4>
+                <small class="footer-sub-society-name flex">Siren: {{ society.siren }}<span class="dot-separator"></span>Ape: {{ society.ape }}</small>
+            </li>
+            <li>{{ society.address }}</li>
+            <li class="flex">{{ society.zip }} {{ society.city }}<span class="dot-separator"></span>{{ society.country }}</li>
+            <li class="footer-contact">
+                <small>
+                    <i class="fa-solid fa-envelope"></i>
+                    <a href="mailto:{{ society.email }}">{{ society.email }}</a>
+                </small>
+                <small>
+                    <i class="fa-solid fa-phone"></i>
+                    <a href="tel:{{ society.phone }}">{{ society.phone }}</a>
+                </small>
+            </li>
+            <li>
+                <small class="italic">
+                    {% if app.request.getLocale() == 'fr' %}
+                        {{ society.sloganFr }}.
+                    {% else %}
+                        {{ society.sloganEn }}.
+                    {% endif %}
+                </small>
+            </li>
+        </ul>
+    </div>
+    <div>
+        <ul>
+            <li class="footer-society-name">
+                <h4>{{ 'label.essential'|trans }}</h4>
+            </li>
+            <li>
+                <a href="{{ path('home', {_locale:app.request.getLocale()}) }}">{{ 'route.home'|trans }}</a>
+            </li>
+            <li>
+                <a href="{{ path('contact', {_locale:app.request.getLocale()}) }}">{{ 'route.contact'|trans }}</a>
+            </li>
+            <li>
+                <a href="#" class="footer-rs-icons">
+                    <i class="fa-brands fa-square-facebook fa-2xl"></i>
+                </a>
+                <a href="#" class="footer-rs-icons">
+                    <i class="fa-brands fa-square-instagram fa-2xl"></i>
+                </a>
+                <a href="#" class="footer-rs-icons">
+                    <i class="fa-brands fa-linkedin fa-2xl"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div>
+        <ul>
+            <lI class="footer-society-name">
+                <h4>{{ 'label.information'|trans }}</h4>
+            </lI>
+            <li>
+                <a href="{{ path('info_terms', {_locale:app.request.getLocale()}) }}">{{ 'route.info_terms'|trans }}</a>
+            </li>
+            <li>
+                <a href="{{ path('info_gdpr', {_locale:app.request.getLocale()}) }}">{{ 'route.info_gdpr'|trans }}</a>
+            </li>
+            <li>
+                <a href="{{ path('info_plan', {_locale:app.request.getLocale()}) }}">{{ 'route.info_plan'|trans }}</a>
+            </li>
+        </ul>
+        <ul>
+
+        </ul>
+    </div>
+    <div id="sub-footer">
+        <small>&copy; 2010-{{ "now"|date("Y") }}<span class="dot-separator"></span>{{ 'label.rights'|trans }}<span class="dot-separator"></span>{{ 'site.name'|trans }}</small>
+    </div>
+</footer>

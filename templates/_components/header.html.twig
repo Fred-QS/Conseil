@@ -1,0 +1,35 @@
+<header>
+    <a href="{{ path('home', {_locale:app.request.getLocale()}) }}">
+        {{ 'site.name'|trans }}
+    </a>
+    <nav>
+        <ul>
+            <li>
+                <a href="{{ path('home', {_locale:app.request.getLocale()}) }}">{{ 'route.home'|trans }}</a>
+            </li>
+            <li>
+                <a href="{{ path('about', {_locale:app.request.getLocale()}) }}">{{ 'route.about'|trans }}</a>
+            </li>
+            <li>
+                <a href="{{ path('experience', {_locale:app.request.getLocale()}) }}">{{ 'route.experience'|trans }}</a>
+            </li>
+            <li>
+                <a href="{{ path('contact', {_locale:app.request.getLocale()}) }}">{{ 'route.contact'|trans }}</a>
+            </li>
+            <li id="language-selector">
+                <span>
+                    {{ app.request.getLocale()|upper }}
+                </span>
+                <i class="fa-solid fa-caret-up"></i>
+                <ul>
+                    <li>
+                        <a href="{{ path(app.request.get('_route'), {_locale: 'fr'}) }}">FR</a>
+                    </li>
+                    <li>
+                        <a href="{{ path(app.request.get('_route'), {_locale: 'en'}) }}">EN</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</header>

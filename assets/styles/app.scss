@@ -1,0 +1,12 @@
+@import "./UI-kit/reboot";
+@import "./UI-kit/elements";
+@import "./components/header";
+@import "./components/footer";
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: lightgray;
+}

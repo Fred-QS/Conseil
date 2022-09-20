@@ -1,22 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ app.request.getLocale() }}_{{ app.request.getLocale()|upper }}">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport"
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>{% block title %}{% endblock %}QS Conseils</title>
+        <title>
+            {% if app.request.get('_route') != 'home' and app.request.get('_route') != 'index' %}
+                {{ str_replace('_'~app.request.getLocale(), '', 'route.'~app.request.get('_route'))|trans }} - {{ 'site.name'|trans }}
+            {% else %}
+                {{ 'site.name'|trans }}
+            {% endif %}
+        </title>
         <link rel="icon" href="{{ asset('build/images/favicon.png') }}">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
-
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
+        {% block stylesheets %}{{ encore_entry_link_tags('app') }}{% endblock %}
+        {% block javascripts %}{{ encore_entry_script_tags('app') }}{% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        {{ include('_components/header.html.twig') }}
+        <main data-controller="{{ set_stimulus(app.request.get('_route')) }}">
+            {% block body %}{% endblock %}
+        </main>
+        {{ include('_components/footer.html.twig') }}
     </body>
 </html>
