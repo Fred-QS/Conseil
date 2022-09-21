@@ -1,12 +1,14 @@
 route:
   index: Home
   home: Home
-  contact: Contact us
-  about: Knowledge
-  experience: Experience
+  contact: Contact
+  skill: Skills
+  reference: References
+  service: Services
   info_terms: Terms of use
   info_gdpr: GDPR
   info_plan: Site map
+  blog: IT News
 site:
   name: QS Consulting
 label:

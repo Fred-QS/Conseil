@@ -11,10 +11,10 @@ class IdentityFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $identity = new Identity();
-        $identity->setNameFr('QS Conseils');
+        $identity->setNameFr('QS Conseil');
         $identity->setNameEn('QS Consulting');
         $identity->setSiren('483345211');
-        $identity->setSiret('48334521100021');
+        $identity->setSiret('48334521100039');
         $identity->setAddress('Impasse de l\'ancienne Tuilerie');
         $identity->setZip('24240');
         $identity->setCity('Pomport');

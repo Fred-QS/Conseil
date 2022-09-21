@@ -1,12 +1,14 @@
 route:
   index: Accueil
   home: Accueil
-  contact: Contactez-nous
-  about: Savoir-faire
-  experience: Expérience
+  contact: Contact
+  skill: Skills
+  reference: Références
+  service: Services
   info_terms: Conditions générales
   info_gdpr: RGPD
   info_plan: Plan du site
+  blog: IT News
 site:
   name: QS Conseil
 label:

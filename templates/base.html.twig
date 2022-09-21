@@ -7,7 +7,11 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>
             {% if app.request.get('_route') != 'home' and app.request.get('_route') != 'index' %}
-                {{ str_replace('_'~app.request.getLocale(), '', 'route.'~app.request.get('_route'))|trans }} - {{ 'site.name'|trans }}
+                {% if str_start_with(app.request.get('_route'), 'blog') %}
+                    {{ 'route.blog'|trans }} - {{ 'site.name'|trans }}
+                {% else %}
+                    {{ str_replace('_'~app.request.getLocale(), '', 'route.'~app.request.get('_route'))|trans }} - {{ 'site.name'|trans }}
+                {% endif %}
             {% else %}
                 {{ 'site.name'|trans }}
             {% endif %}
