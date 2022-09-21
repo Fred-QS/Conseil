@@ -22,21 +22,21 @@ header nav > ul > li {
   padding: 0 10px;
 }
 
-#language-selector > span {
+.dropdown > span, .dropdown > a {
   margin-right: 5px;
 }
 
-#language-selector > svg, #language-selector > i {
+.dropdown > svg, .dropdown > i {
   transform-origin: 50% 50%;
   transform: rotate(-180deg);
   transition: all linear 0.2s;
 }
 
-#language-selector:hover > svg, #language-selector:hover > i {
+.dropdown:hover > svg, .dropdown:hover > i {
   transform: rotate(0deg);
 }
 
-#language-selector {
+.dropdown {
   position: relative;
   z-index: 1;
   cursor: pointer;
@@ -45,7 +45,7 @@ header nav > ul > li {
   align-items: center;
 }
 
-#language-selector > ul {
+.dropdown > ul {
   position: absolute;
   top: 100%;
   left: 0;
@@ -57,7 +57,7 @@ header nav > ul > li {
   transition: all linear 0.2s;
 }
 
-#language-selector:hover > ul {
+.dropdown:hover > ul {
   visibility: visible;
   opacity: 1;
 }

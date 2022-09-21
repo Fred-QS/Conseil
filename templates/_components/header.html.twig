@@ -7,14 +7,54 @@
             <li>
                 <a href="{{ path('home', {_locale:app.request.getLocale()}) }}">{{ 'route.home'|trans }}</a>
             </li>
-            <li>
-                <a href="{{ path('skill', {_locale:app.request.getLocale()}) }}">{{ 'route.skill'|trans }}</a>
+            <li class="dropdown">
+                <a href="{{ path('skill_index', {_locale:app.request.getLocale()}) }}">{{ 'route.skill'|trans }}</a>
+                <i class="fa-solid fa-caret-up"></i>
+                <ul>
+                    <li>
+                        <a href="{{ path('skill_development', {_locale:app.request.getLocale()}) }}">{{ 'route.development'|trans }}</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('skill_iot', {_locale:app.request.getLocale()}) }}">{{ 'route.iot'|trans }}</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('skill_consulting', {_locale:app.request.getLocale()}) }}">{{ 'route.consulting'|trans }}</a>
+                    </li>
+                </ul>
             </li>
-            <li>
-                <a href="{{ path('reference', {_locale:app.request.getLocale()}) }}">{{ 'route.reference'|trans }}</a>
+            <li class="dropdown">
+                <a href="{{ path('reference_index', {_locale:app.request.getLocale()}) }}">{{ 'route.reference'|trans }}</a>
+                <i class="fa-solid fa-caret-up"></i>
+                <ul><ul>
+                        <li>
+                            <a href="{{ path('reference_web', {_locale:app.request.getLocale()}) }}">{{ 'route.web'|trans }}</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('reference_mobile', {_locale:app.request.getLocale()}) }}">{{ 'route.mobile'|trans }}</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('reference_desktop', {_locale:app.request.getLocale()}) }}">{{ 'route.desktop'|trans }}</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('reference_training', {_locale:app.request.getLocale()}) }}">{{ 'route.training'|trans }}</a>
+                        </li>
+                    </ul>
+                </ul>
             </li>
-            <li>
-                <a href="{{ path('service', {_locale:app.request.getLocale()}) }}">{{ 'route.service'|trans }}</a>
+            <li class="dropdown">
+                <a href="{{ path('service_index', {_locale:app.request.getLocale()}) }}">{{ 'route.service'|trans }}</a>
+                <i class="fa-solid fa-caret-up"></i>
+                <ul>
+                    <li>
+                        <a href="{{ path('service_application', {_locale:app.request.getLocale()}) }}">{{ 'route.application'|trans }}</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('service_consulting', {_locale:app.request.getLocale()}) }}">{{ 'route.consulting'|trans }}</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('service_iot', {_locale:app.request.getLocale()}) }}">{{ 'route.iot'|trans }}</a>
+                    </li>
+                </ul>
             </li>
             <li>
                 <a href="{{ path('blog_index', {_locale:app.request.getLocale()}) }}">{{ 'route.blog'|trans }}</a>
@@ -22,7 +62,7 @@
             <li>
                 <a href="{{ path('contact', {_locale:app.request.getLocale()}) }}">{{ 'route.contact'|trans }}</a>
             </li>
-            <li id="language-selector">
+            <li class="dropdown">
                 <span>
                     {{ app.request.getLocale()|upper }}
                 </span>

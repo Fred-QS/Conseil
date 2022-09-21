@@ -9,6 +9,14 @@ route:
   info_gdpr: RGPD
   info_plan: Plan du site
   blog: IT News
+  iot: IoT
+  consulting: Conseil
+  development: Développement
+  web: Web
+  mobile: Applications mobiles
+  desktop: Applications de bureau
+  training: Formations
+  application: Applications
 site:
   name: QS Conseil
 label:

@@ -9,6 +9,14 @@ route:
   info_gdpr: GDPR
   info_plan: Site map
   blog: IT News
+  iot: IoT
+  consulting: Consulting
+  development: Development
+  web: Web
+  mobile: Mobile app
+  desktop: Desktop app
+  training: Training
+  application: Applications
 site:
   name: QS Consulting
 label:

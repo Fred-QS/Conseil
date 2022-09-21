@@ -11,26 +11,29 @@ class RouteExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('str_replace', [$this, 'strReplace']),
             new TwigFunction('set_stimulus', [$this, 'setStimulus']),
-            new TwigFunction('str_start_with', [$this, 'strStartWith']),
+            new TwigFunction('splitter', [$this, 'splitter']),
         ];
     }
 
-    public function strStartWith(string $haystack, string $needle): bool
+    public function splitter(string $route): string
     {
-        return str_starts_with($haystack, $needle);
-    }
-
-    public function strReplace(string $search, string $replace, string $original): string
-    {
-        return str_replace($search, $replace, $original);
+        $explode = explode('_', $route);
+        $item = $explode[0];
+        if (isset($explode[1]) && $explode[1] !== 'index') {
+            $item =  $explode[1];
+        }
+        return $item;
     }
 
     public function setStimulus(string $route): string
     {
-        $route = ($route === 'index') ? 'home' : $route;
-        $route = (str_starts_with($route, 'blog')) ? 'article' : $route;
-        return str_replace(['info_'], '', $route);
+        $item = ($route === 'index') ? 'home' : $route;
+        $item = (str_starts_with($item, 'blog')) ? 'article' : $item;
+        if ($item !== 'home' && $item !== 'article') {
+            $explode = explode('_', $route);
+            $item = $explode[0];
+        }
+        return $item;
     }
 }

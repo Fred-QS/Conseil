@@ -6,12 +6,9 @@
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>
-            {% if app.request.get('_route') != 'home' and app.request.get('_route') != 'index' %}
-                {% if str_start_with(app.request.get('_route'), 'blog') %}
-                    {{ 'route.blog'|trans }} - {{ 'site.name'|trans }}
-                {% else %}
-                    {{ str_replace('_'~app.request.getLocale(), '', 'route.'~app.request.get('_route'))|trans }} - {{ 'site.name'|trans }}
-                {% endif %}
+            {% set route = app.request.get('_route') %}
+            {% if route != 'home' and route != 'index' %}
+                {{ ('route.'~splitter(route))|trans }} - {{ 'site.name'|trans }}
             {% else %}
                 {{ 'site.name'|trans }}
             {% endif %}

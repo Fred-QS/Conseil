@@ -2,7 +2,7 @@
     <div>
         {% set society = society_data() %}
         <ul>
-            <li class="footer-society-name">
+            <li class="footer-titles">
                 <h4>
                     {% if app.request.getLocale() == 'fr' %}
                         {{ society.nameFr }}
@@ -37,11 +37,17 @@
     </div>
     <div>
         <ul>
-            <li class="footer-society-name">
+            <li class="footer-titles">
                 <h4>{{ 'label.essential'|trans }}</h4>
             </li>
             <li>
                 <a href="{{ path('home', {_locale:app.request.getLocale()}) }}">{{ 'route.home'|trans }}</a>
+            </li>
+            <li>
+                <a href="{{ path('skill_index', {_locale:app.request.getLocale()}) }}">{{ 'route.skill'|trans }}</a>
+            </li>
+            <li>
+                <a href="{{ path('service_index', {_locale:app.request.getLocale()}) }}">{{ 'route.service'|trans }}</a>
             </li>
             <li>
                 <a href="{{ path('contact', {_locale:app.request.getLocale()}) }}">{{ 'route.contact'|trans }}</a>
@@ -61,9 +67,12 @@
     </div>
     <div>
         <ul>
-            <lI class="footer-society-name">
+            <li class="footer-titles">
                 <h4>{{ 'label.information'|trans }}</h4>
-            </lI>
+            </li>
+            <li>
+                <a href="{{ path('reference_index', {_locale:app.request.getLocale()}) }}">{{ 'route.reference'|trans }}</a>
+            </li>
             <li>
                 <a href="{{ path('info_terms', {_locale:app.request.getLocale()}) }}">{{ 'route.info_terms'|trans }}</a>
             </li>
