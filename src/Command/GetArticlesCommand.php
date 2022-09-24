@@ -21,8 +21,6 @@ class GetArticlesCommand extends Command
     protected static $defaultName = 'api:articles';
     protected OutputInterface $output;
     protected InputInterface $input;
-    protected string $apiUrl;
-    protected int $page = 0;
 
     public function __construct(
         protected EntityManagerInterface $entityManager,
@@ -54,9 +52,10 @@ class GetArticlesCommand extends Command
         if ($lang && in_array($lang, $this->languages, true)) {
 
             $language = ($lang === 'en') ? 'english' : 'french';
-            $this->apiUrl = $this->newsdataUrl . '?apikey=' . $this->newsdataKey . '&language=' . $lang . '&category=' . $this->newsdataCategories . '&page=' . $this->page;
-
-            $output->writeln($this->apiUrl);
+            $newsdataApiObj = new NewsdataApi($this->newsdataKey);
+            $data = ["language" => $lang, "category" => $this->newsdataCategories];
+            $response = $newsdataApiObj->get_latest_news($data);
+            dump($response);
 
             //$email = new NewsletterMailer($this->mailer, $this->entityManager);
             //$email->sendEmail($lang);
