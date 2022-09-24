@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ArticleRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Exception;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
 class Article
@@ -99,9 +100,13 @@ class Article
         return $this->keywords;
     }
 
-    public function setKeywords(?string $keywords): self
+    public function setKeywords(array|string|null $keywords): self
     {
-        $this->keywords = $keywords;
+        if (is_array($keywords)) {
+            $this->keywords = implode(',', $keywords);
+        } else {
+            $this->keywords = $keywords ?? '';
+        }
 
         return $this;
     }
@@ -111,9 +116,13 @@ class Article
         return $this->creator;
     }
 
-    public function setCreator(string $creator): self
+    public function setCreator(array|string|null $creator): self
     {
-        $this->creator = $creator;
+        if (is_array($creator)) {
+            $this->creator = implode(',', $creator);
+        } else {
+            $this->creator = $creator ?? '';
+        }
 
         return $this;
     }
@@ -159,9 +168,12 @@ class Article
         return $this->pubDate;
     }
 
-    public function setPubDate(\DateTimeInterface $pubDate): self
+    /**
+     * @throws Exception
+     */
+    public function setPubDate(string $pubDate): self
     {
-        $this->pubDate = $pubDate;
+        $this->pubDate = new \DateTimeImmutable($pubDate);
 
         return $this;
     }
@@ -183,9 +195,9 @@ class Article
         return $this->country;
     }
 
-    public function setCountry(string $country): self
+    public function setCountry(array $country): self
     {
-        $this->country = $country;
+        $this->country = implode(',', $country);
 
         return $this;
     }
@@ -195,9 +207,9 @@ class Article
         return $this->category;
     }
 
-    public function setCategory(string $category): self
+    public function setCategory(array $category): self
     {
-        $this->category = $category;
+        $this->category = implode(',', $category);
 
         return $this;
     }

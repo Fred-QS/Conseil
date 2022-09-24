@@ -21,6 +21,7 @@ class GetArticlesCommand extends Command
     protected static $defaultName = 'api:articles';
     protected OutputInterface $output;
     protected InputInterface $input;
+    private array $articles = [];
 
     public function __construct(
         protected EntityManagerInterface $entityManager,
@@ -37,7 +38,6 @@ class GetArticlesCommand extends Command
     {
         $this
             ->setDescription('Import articles from NEWSDATA.IO')
-            ->addArgument('lang', InputArgument::REQUIRED, 'Articles language (fr or en)')
         ;
     }
 
@@ -46,24 +46,83 @@ class GetArticlesCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        $this->input = $input;
+        $this->output = $output;
+        $check = 'ok';
+        $checkLang = 'French';
         $io = new SymfonyStyle($input, $output);
-        $lang = $input->getArgument('lang');
 
-        if ($lang && in_array($lang, $this->languages, true)) {
+        $io->title('French articles importation process');
+        $check = $this->getArticles('fr');
+        $this->articles = [];
 
-            $language = ($lang === 'en') ? 'english' : 'french';
-            $newsdataApiObj = new NewsdataApi($this->newsdataKey);
-            $data = ["language" => $lang, "category" => $this->newsdataCategories];
-            $response = $newsdataApiObj->get_latest_news($data);
-            dump($response);
-
-            //$email = new NewsletterMailer($this->mailer, $this->entityManager);
-            //$email->sendEmail($lang);
-
-            $io->success('All ' . $language . ' articles have been imported');
-            return Command::SUCCESS;
+        if ($check === 'ok') {
+            $checkLang = 'English';
+            $io->title('English articles importation process');
+            $check = $this->getArticles('en');
         }
 
-        return Command::FAILURE;
+        if ($check === 'ok') {
+            //$email = new NewsletterMailer($this->mailer, $this->entityManager);
+            //$email->sendEmail($lang);
+            $io->success('Articles have been imported');
+        } else {
+            $io->caution($checkLang . ' importation failed: ' . $check);
+        }
+
+        return Command::SUCCESS;
+    }
+    
+    private function getArticles($lang): string
+    {
+        $io = new SymfonyStyle($this->input, $this->output);
+        $io->progressStart(10);
+        $page = 0;
+        while (count($this->articles) < 10) {
+            $newsdataApiObj = new NewsdataApi($this->newsdataKey);
+            $data = ["language" => $lang, "category" => $this->newsdataCategories, "page" => $page];
+            $articles = $newsdataApiObj->get_latest_news($data);
+            if ($articles->status === 'success') {
+                foreach ($articles->results as $article) {
+                    if ($article->description !== null
+                        && $article->image_url !== null
+                        && $article->content !== null
+                        && strlen($article->content) > 3000) {
+                        $oldArticle = $this->entityManager->getRepository(Article::class)->findOneBy(['title' => $article->title]);
+                        if ($oldArticle === null) {
+                            $this->articles[] = $article;
+                            $io->progressAdvance();
+                        }
+                    }
+                }
+                $page++;
+            } else {
+                $io->progressFinish();
+                return $articles->results->message;
+            }
+        }
+        foreach ($this->articles as $newArticle) {
+            
+            $art = new Article();
+            $art->setTitle($newArticle->title);
+            $art->setLink($newArticle->link);
+            $art->setKeywords($newArticle->keywords);
+            $art->setCreator($newArticle->creator);
+            $art->setVideoUrl($newArticle->video_url);
+            $art->setDescription($newArticle->description);
+            $art->setContent($newArticle->content);
+            $art->setPubDate($newArticle->pubDate);
+            $art->setImageUrl($newArticle->image_url);
+            $art->setSource($newArticle->source_id);
+            $art->setCountry($newArticle->country);
+            $art->setCategory($newArticle->category);
+            $art->setLanguage($newArticle->title);
+            
+            $this->entityManager->persist($art);
+            $this->entityManager->flush();
+        }
+        $io->progressFinish();
+        return 'ok';
     }
 }
+

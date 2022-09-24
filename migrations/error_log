@@ -1,0 +1,4 @@
+[11-Sep-2022 15:57:32 UTC] PHP Fatal error:  Uncaught Error: Class "Doctrine\Migrations\AbstractMigration" not found in /home/gcpv9290/perso/qs-conseil/Conseils/migrations/Version20220903085216.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/gcpv9290/perso/qs-conseil/Conseils/migrations/Version20220903085216.php on line 13
