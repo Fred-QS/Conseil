@@ -12,6 +12,7 @@ use NewsdataIO\NewsdataApi;
 use App\Entity\Article;
 use Symfony\Component\Mailer\MailerInterface;
 use App\Mail\NewsletterMailer;
+use App\Mail\ErrorImportArticleEmail;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 
@@ -67,6 +68,8 @@ class GetArticlesCommand extends Command
             //$email->sendEmail($lang);
             $io->success('Articles have been imported');
         } else {
+            $email = new ErrorImportArticleEmail($this->mailer, $this->entityManager);
+            $email->sendEmail();
             $io->caution($checkLang . ' importation failed: ' . $check);
         }
 
