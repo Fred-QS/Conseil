@@ -41,3 +41,10 @@ notice:
   submit:
     good:
       contact: Votre message a bien été envoyé !
+maintenance:
+  title: Site en cours de maintenance
+  paragraph: Nous reviendrons bientôt. Désolé pour le dérangement.
+errors:
+  title: Erreur
+  not_found: Page non trouvée
+  back: Retour à la page d'accueil

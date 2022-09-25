@@ -1,0 +1,4 @@
+artgris_maintenance:
+  enable: true                 # Enable|Disable maintenance - default: false
+  ips: [''] # IPs allow (prod) - default: []
+  response: 503                # Maintenance Page HTTP Status Code - default: 503

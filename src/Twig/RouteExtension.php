@@ -13,7 +13,28 @@ class RouteExtension extends AbstractExtension
         return [
             new TwigFunction('set_stimulus', [$this, 'setStimulus']),
             new TwigFunction('splitter', [$this, 'splitter']),
+            new TwigFunction('set_error_syntax', [$this, 'setErrorSyntax']),
+            new TwigFunction('to_translation', [$this, 'toTranslation']),
+            new TwigFunction('parse_translated_route', [$this, 'parseTranslatedRoute']),
         ];
+    }
+
+    public function parseTranslatedRoute(string $route): string
+    {
+        if (str_starts_with($route, 'blog')) {
+            return 'blog_index';
+        }
+        return $route;
+    }
+
+    public function toTranslation(string $text): string
+    {
+        return 'errors.' . strtolower(str_replace(' ', '_', $text));
+    }
+
+    public function setErrorSyntax(int $code, string $title, string $lang): string
+    {
+        return ($lang === 'fr') ? $title . ' ' . $code : $code . ' ' . $title;
     }
 
     public function splitter(string $route): string

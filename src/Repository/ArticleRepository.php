@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Article;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * @extends ServiceEntityRepository<Article>
@@ -37,6 +38,34 @@ class ArticleRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function findAllByOrderDesc(string $lang, int $page = 1, ?string $category, ?string $orderBy): Paginator
+    {
+        $pageSize = 10;
+        $firstResult = ($page - 1) * $pageSize;
+        $language = ($lang === 'fr') ? 'french' : 'english';
+
+        $qry = $this->createQueryBuilder('a')
+            ->andWhere('a.language = :language')
+            ->setParameter('language', $language);
+
+        if ($category !== null) {
+            $qry->andWhere('a.category LIKE :category')
+                ->setParameter('category', '%' . $category . '%');
+        }
+
+        if ($orderBy !== null) {
+            $qry->orderBy('a.id', $orderBy);
+        } else {
+            $qry->orderBy('a.id', 'desc');
+        }
+
+        $qry->setFirstResult($firstResult)
+            ->setMaxResults($pageSize)
+            ->getQuery();
+
+        return new Paginator($qry, true);
     }
 
 //    /**

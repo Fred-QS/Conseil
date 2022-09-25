@@ -41,3 +41,10 @@ notice:
   submit:
     good:
       contact: Your message has been sent successfully !
+maintenance:
+  title: Site under maintenance
+  paragraph: We'll be back soon. Sorry for inconvenience.
+errors:
+  title: Error
+  not_found: Page not found
+  back: Back to home page

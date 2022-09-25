@@ -54,6 +54,9 @@ class Article
     #[ORM\Column(length: 255)]
     private ?string $language = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $uri = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -222,6 +225,18 @@ class Article
     public function setLanguage(string $language): self
     {
         $this->language = $language;
+
+        return $this;
+    }
+
+    public function getUri(): ?string
+    {
+        return $this->uri;
+    }
+
+    public function setUri(string $uri): self
+    {
+        $this->uri = $uri;
 
         return $this;
     }

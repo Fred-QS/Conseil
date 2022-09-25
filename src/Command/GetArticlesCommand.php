@@ -15,6 +15,7 @@ use App\Mail\NewsletterMailer;
 use App\Mail\ErrorImportArticleEmail;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class GetArticlesCommand extends Command
 {
@@ -26,6 +27,7 @@ class GetArticlesCommand extends Command
 
     public function __construct(
         protected EntityManagerInterface $entityManager,
+        private SluggerInterface $slugger,
         protected ParameterBagInterface $params,
         protected MailerInterface $mailer,
         protected string $newsdataUrl,
@@ -64,9 +66,11 @@ class GetArticlesCommand extends Command
         }
 
         if ($check === 'ok') {
-            //$email = new NewsletterMailer($this->mailer, $this->entityManager);
-            //$email->sendEmail($lang);
+            $email = new NewsletterMailer($this->mailer, $this->entityManager);
+            $email->sendEmail('fr');
+            $email->sendEmail('en');
             $io->success('Articles have been imported');
+            $io->success('Newsletters have been sent.');
         } else {
             $email = new ErrorImportArticleEmail($this->mailer, $this->entityManager);
             $email->sendEmail();
@@ -104,10 +108,13 @@ class GetArticlesCommand extends Command
                 return $articles->results->message;
             }
         }
+        $this->output->writeln('<comment>  ></comment> <info> ' . ($page + 1) . ' calls have been done.</info>');
         foreach ($this->articles as $newArticle) {
-            
+
             $art = new Article();
             $art->setTitle($newArticle->title);
+            $slug = strtolower($this->slugger->slug($newArticle->title, '-', $lang));
+            $art->setUri($slug);
             $art->setLink($newArticle->link);
             $art->setKeywords($newArticle->keywords);
             $art->setCreator($newArticle->creator);
@@ -119,7 +126,7 @@ class GetArticlesCommand extends Command
             $art->setSource($newArticle->source_id);
             $art->setCountry($newArticle->country);
             $art->setCategory($newArticle->category);
-            $art->setLanguage($newArticle->title);
+            $art->setLanguage($newArticle->language);
             
             $this->entityManager->persist($art);
             $this->entityManager->flush();

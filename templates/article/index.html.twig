@@ -1,5 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
+    {% if articles is defined %}
+        <p>Total: {{ totalItems }}</p>
+        <p>Pages count: {{ pages }}</p>
+        {% for article in articles %}
+            {{ dump(article) }}
+        {% endfor %}
+    {% endif %}
 {% endblock %}

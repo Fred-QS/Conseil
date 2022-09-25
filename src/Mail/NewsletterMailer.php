@@ -25,7 +25,7 @@ class NewsletterMailer
      */
     public function sendEmail(string $lang): void
     {
-        $newsletters = $this->entityManager->getRepository(Newsletter::class)->findAll();
+        $newsletters = $this->entityManager->getRepository(Newsletter::class)->findBy(['lang' => $lang]);
         $identity = $this->entityManager->getRepository(Identity::class)->find(1);
         foreach ($newsletters as $newsletter) {
             $email = (new TemplatedEmail())

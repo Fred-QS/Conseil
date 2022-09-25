@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.getLocale() }}_{{ app.request.getLocale()|upper }}">
+{% set error = 'errors.title'|trans %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{ set_error_syntax(status_code, error, app.request.getLocale()) }} - {{ 'site.name'|trans }}</title>
+    <link rel="icon" href="{{ asset('build/images/favicon.png') }}">
+    {% block stylesheets %}{{ encore_entry_link_tags('app') }}{% endblock %}
+    {% block javascripts %}{{ encore_entry_script_tags('app') }}{% endblock %}
+</head>
+<body>
+<main id="errors-main">
+    <h1>{{ set_error_syntax(status_code, error, app.request.getLocale()) }}</h1>
+    <p>{{ to_translation(status_text)|trans }}</p>
+    <a href="{{ path('home', {_locale:app.request.getLocale()}) }}">{{ 'errors.back'|trans }}</a>
+</main>
+</body>
+</html>

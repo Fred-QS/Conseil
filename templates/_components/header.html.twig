@@ -69,10 +69,10 @@
                 <i class="fa-solid fa-caret-up"></i>
                 <ul>
                     <li>
-                        <a href="{{ path(app.request.get('_route'), {_locale: 'fr'}) }}">FR</a>
+                        <a href="{{ path(parse_translated_route(app.request.get('_route')), {_locale: 'fr'}) }}">FR</a>
                     </li>
                     <li>
-                        <a href="{{ path(app.request.get('_route'), {_locale: 'en'}) }}">EN</a>
+                        <a href="{{ path(parse_translated_route(app.request.get('_route')), {_locale: 'en'}) }}">EN</a>
                     </li>
                 </ul>
             </li>
