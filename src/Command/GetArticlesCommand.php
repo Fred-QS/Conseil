@@ -86,19 +86,19 @@ class GetArticlesCommand extends Command
     private function getArticles($lang): string
     {
         $io = new SymfonyStyle($this->input, $this->output);
-        $io->progressStart(10);
+        $io->progressStart(5);
         $page = 0;
-        while (count($this->articles) < 10) {
+        while (count($this->articles) < 5) {
             $newsdataApiObj = new NewsdataApi($this->newsdataKey);
             $q = ($lang === 'fr') ? 'logiciel' : 'software';
             $data = ["language" => $lang, "page" => $page, "q" => $q];
             $articles = $newsdataApiObj->get_latest_news($data);
             if ($articles->status === 'success') {
                 foreach ($articles->results as $article) {
+                    $words = ($article->content !== null) ? explode(' ', $article->content) : [];
                     if ($article->description !== null
                         && $article->image_url !== null
-                        && $article->content !== null
-                        && strlen($article->content) > 3000) {
+                        && count($words) > 299) {
                         $oldArticle = $this->entityManager->getRepository(Article::class)->findOneBy(['title' => $article->title]);
                         if ($oldArticle === null) {
                             $this->articles[] = $article;
