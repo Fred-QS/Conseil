@@ -4,8 +4,13 @@
     {% if articles is defined %}
         <p>Total: {{ totalItems }}</p>
         <p>Pages count: {{ pages }}</p>
-        {% for article in articles %}
-            {{ dump(article) }}
-        {% endfor %}
+        <div class="articles-container">
+            {% for article in articles %}
+                <div class="article-preview">
+                    <h3>{{ article.title }}</h3>
+                    <div class="article-image-preview" style="background-image: url('{{ article.imageUrl }}')"></div>
+                </div>
+            {% endfor %}
+        </div>
     {% endif %}
 {% endblock %}

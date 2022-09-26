@@ -1,0 +1,25 @@
+.articles-container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+
+.article-preview {
+  width: calc(33.33% - 40px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+
+.article-image-preview {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  margin: 10px 0;
+  height: 200px;
+}
