@@ -3,6 +3,7 @@
 namespace App\Command;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -31,8 +32,7 @@ class GetArticlesCommand extends Command
         protected ParameterBagInterface $params,
         protected MailerInterface $mailer,
         protected string $newsdataUrl,
-        protected string $newsdataKey,
-        protected string $newsdataCategories
+        protected string $newsdataKey
     ) {
         parent::__construct();
     }
@@ -79,7 +79,10 @@ class GetArticlesCommand extends Command
 
         return Command::SUCCESS;
     }
-    
+
+    /**
+     * @throws Exception
+     */
     private function getArticles($lang): string
     {
         $io = new SymfonyStyle($this->input, $this->output);
@@ -87,7 +90,8 @@ class GetArticlesCommand extends Command
         $page = 0;
         while (count($this->articles) < 10) {
             $newsdataApiObj = new NewsdataApi($this->newsdataKey);
-            $data = ["language" => $lang, "category" => $this->newsdataCategories, "page" => $page];
+            $q = ($lang === 'fr') ? 'logiciel' : 'software';
+            $data = ["language" => $lang, "page" => $page, "q" => $q];
             $articles = $newsdataApiObj->get_latest_news($data);
             if ($articles->status === 'success') {
                 foreach ($articles->results as $article) {

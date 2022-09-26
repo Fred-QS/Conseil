@@ -17,6 +17,7 @@ route:
   desktop: Applications de bureau
   training: Formations
   application: Applications
+  article: Article
 site:
   name: QS Conseil
 label:

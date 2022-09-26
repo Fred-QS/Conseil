@@ -17,6 +17,7 @@ route:
   desktop: Desktop app
   training: Training
   application: Applications
+  article: Article
 site:
   name: QS Consulting
 label:
