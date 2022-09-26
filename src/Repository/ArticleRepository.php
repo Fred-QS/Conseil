@@ -40,7 +40,7 @@ class ArticleRepository extends ServiceEntityRepository
         }
     }
 
-    public function findAllByOrderDesc(string $lang, int $page = 1, ?string $category, ?string $orderBy): Paginator
+    public function findAllByOrderDesc(string $lang, int $page, ?string $category, ?string $orderBy): Paginator
     {
         $pageSize = 10;
         $firstResult = ($page - 1) * $pageSize;
