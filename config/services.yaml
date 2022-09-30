@@ -29,3 +29,4 @@ services:
     App\Command\GetArticlesCommand:
         $newsdataUrl: '%env(NEWSDATA_URL)%'
         $newsdataKey: '%env(NEWSDATA_KEY)%'
+        $newsdataCategories: '%env(NEWSDATA_CATEGORY)%'
