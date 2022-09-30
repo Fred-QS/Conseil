@@ -27,7 +27,7 @@ class Article
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $keywords = null;
 
-    #[ORM\Column(type: Types::TEXT)]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $creator = null;
 
     #[ORM\Column(length: 255, nullable: true)]

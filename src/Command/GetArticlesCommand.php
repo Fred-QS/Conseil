@@ -83,9 +83,10 @@ class GetArticlesCommand extends Command
     private function getArticles($lang): string
     {
         $io = new SymfonyStyle($this->input, $this->output);
-        $io->progressStart(10);
+        $io->progressStart(5);
         $page = 0;
-        while (count($this->articles) < 10) {
+        $cnt = 1;
+        while (count($this->articles) <= 5 || $cnt < 200) {
             $newsdataApiObj = new NewsdataApi($this->newsdataKey);
             $data = ["language" => $lang, "category" => $this->newsdataCategories, "page" => $page];
             $articles = $newsdataApiObj->get_latest_news($data);
@@ -107,6 +108,7 @@ class GetArticlesCommand extends Command
                 $io->progressFinish();
                 return $articles->results->message;
             }
+            $cnt++;
         }
         $this->output->writeln('<comment>  ></comment> <info> ' . ($page + 1) . ' calls have been done.</info>');
         foreach ($this->articles as $newArticle) {
