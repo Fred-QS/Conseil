@@ -7,11 +7,15 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>
             {% block title %}
-                {% set route = app.request.get('_route') %}
-                {% if route != 'home' and route != 'index' %}
-                    {{ ('route.'~splitter(route))|trans }} - {{ 'site.name'|trans }}
+                {% if article is defined %}
+                    {{ article.title }} - {{ 'site.name'|trans }}
                 {% else %}
-                    {{ 'site.name'|trans }}
+                    {% set route = app.request.get('_route') %}
+                    {% if route != 'home' and route != 'index' %}
+                        {{ ('route.'~splitter(route))|trans }} - {{ 'site.name'|trans }}
+                    {% else %}
+                        {{ 'site.name'|trans }}
+                    {% endif %}
                 {% endif %}
             {% endblock %}
         </title>

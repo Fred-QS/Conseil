@@ -21,7 +21,7 @@ class RouteExtension extends AbstractExtension
 
     public function parseTranslatedRoute(string $route): string
     {
-        if (str_starts_with($route, 'blog')) {
+        if ($route === 'blog_article') {
             return 'blog_index';
         }
         return $route;
