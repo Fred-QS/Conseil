@@ -3,6 +3,7 @@
 namespace App\Command;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -17,10 +18,11 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
+#[AsCommand(
+    name: 'api:articles',
+)]
 class GetArticlesCommand extends Command
 {
-    private array $languages = ['fr', 'en'];
-    protected static $defaultName = 'api:articles';
     protected OutputInterface $output;
     protected InputInterface $input;
     private array $articles = [];
