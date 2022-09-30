@@ -1,0 +1,4 @@
+[27-Sep-2022 07:04:40 UTC] PHP Fatal error:  Uncaught Error: Class "Doctrine\Bundle\FixturesBundle\Fixture" not found in /home/gcpv9290/perso/qs-conseil/Conseils/src/DataFixtures/IdentityFixtures.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/gcpv9290/perso/qs-conseil/Conseils/src/DataFixtures/IdentityFixtures.php on line 9

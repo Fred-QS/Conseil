@@ -1,0 +1,8 @@
+[28-Sep-2022 06:30:50 UTC] PHP Fatal error:  Uncaught Error: Class "Twig\Extension\AbstractExtension" not found in /home/gcpv9290/perso/qs-conseil/Conseils/src/Twig/DataExtension.php:10
+Stack trace:
+#0 {main}
+  thrown in /home/gcpv9290/perso/qs-conseil/Conseils/src/Twig/DataExtension.php on line 10
+[28-Sep-2022 06:30:51 UTC] PHP Fatal error:  Uncaught Error: Class "Twig\Extension\AbstractExtension" not found in /home/gcpv9290/perso/qs-conseil/Conseils/src/Twig/RouteExtension.php:8
+Stack trace:
+#0 {main}
+  thrown in /home/gcpv9290/perso/qs-conseil/Conseils/src/Twig/RouteExtension.php on line 8

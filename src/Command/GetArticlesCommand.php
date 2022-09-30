@@ -86,7 +86,7 @@ class GetArticlesCommand extends Command
         $io->progressStart(5);
         $page = 0;
         $cnt = 1;
-        while (count($this->articles) <= 5 || $cnt < 200) {
+        while (count($this->articles) <= 5 && $cnt < 100) {
             $newsdataApiObj = new NewsdataApi($this->newsdataKey);
             $data = ["language" => $lang, "category" => $this->newsdataCategories, "page" => $page];
             $articles = $newsdataApiObj->get_latest_news($data);
