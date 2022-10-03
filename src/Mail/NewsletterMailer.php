@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Entity\Article;
 use App\Entity\Identity;
 use App\Entity\Newsletter;
 use Doctrine\ORM\EntityManagerInterface;
@@ -27,6 +28,7 @@ class NewsletterMailer
     {
         $newsletters = $this->entityManager->getRepository(Newsletter::class)->findBy(['lang' => $lang]);
         $identity = $this->entityManager->getRepository(Identity::class)->find(1);
+        $articles = $this->entityManager->getRepository(Article::class)->getLatestArticles($lang);
         foreach ($newsletters as $newsletter) {
             $email = (new TemplatedEmail())
                 ->from(new Address($identity->getEmail(), $identity->getNameFr()))
@@ -35,7 +37,8 @@ class NewsletterMailer
                 ->htmlTemplate('emails/newsletter.html.twig')
                 ->context([
                     'message' => 'TODO',
-                    'lang' => $lang
+                    'lang' => $lang,
+                    'articles' => $articles
                 ]);
 
             $this->mailer->send($email);

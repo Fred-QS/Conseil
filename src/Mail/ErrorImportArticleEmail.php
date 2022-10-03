@@ -23,7 +23,7 @@ class ErrorImportArticleEmail
     /**
      * @throws TransportExceptionInterface
      */
-    public function sendEmail(): void
+    public function sendEmail(string $mess): void
     {
         $identity = $this->entityManager->getRepository(Identity::class)->find(1);
         $email = (new TemplatedEmail())
@@ -32,7 +32,8 @@ class ErrorImportArticleEmail
             ->subject('Import articles error')
             ->htmlTemplate('emails/error-import-article.html.twig')
             ->context([
-                'lang' => 'fr'
+                'lang' => 'fr',
+                'message' => $mess
             ]);
 
         $this->mailer->send($email);

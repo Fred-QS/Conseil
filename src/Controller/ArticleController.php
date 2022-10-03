@@ -56,6 +56,7 @@ class ArticleController extends AbstractController
     public function article(Request $request, string $uri): Response
     {
         $lang = ($request->getLocale() === 'fr') ? 'french' : 'english';
+        /* @var Article $article */
         $article = $this->entityManager->getRepository(Article::class)->findOneBy(['uri' => $uri, 'language' => $lang]);
         return $this->render('article/article.html.twig', [
             'article' => $article

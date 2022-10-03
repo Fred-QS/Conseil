@@ -4,6 +4,11 @@
     <h1>Hello</h1>
 
     <p>
-        Newsletter !
+        Articles :
     </p>
+    <ul>
+        {% for article in articles %}
+            <li>{{ article.title }}</li>
+        {% endfor %}
+    </ul>
 {% endblock %}

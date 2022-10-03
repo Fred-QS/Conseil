@@ -2,7 +2,9 @@
 
 namespace App\Command;
 
+use App\SeoStrategy\Diffusion;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -17,6 +19,7 @@ use App\Mail\ErrorImportArticleEmail;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use App\SeoStrategy\Formater;
 
 #[AsCommand(
     name: 'api:articles',
@@ -29,9 +32,9 @@ class GetArticlesCommand extends Command
 
     public function __construct(
         protected EntityManagerInterface $entityManager,
+        protected MailerInterface $mailer,
         private SluggerInterface $slugger,
         protected ParameterBagInterface $params,
-        protected MailerInterface $mailer,
         protected string $newsdataUrl,
         protected string $newsdataKey,
         protected string $newsdataCategories
@@ -48,6 +51,7 @@ class GetArticlesCommand extends Command
 
     /**
      * @throws TransportExceptionInterface
+     * @throws Exception
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
@@ -67,21 +71,22 @@ class GetArticlesCommand extends Command
             $check = $this->getArticles('en');
         }
 
-        if ($check === 'ok') {
-            $email = new NewsletterMailer($this->mailer, $this->entityManager);
-            $email->sendEmail('fr');
-            $email->sendEmail('en');
+        $diffusion = new Diffusion($this->mailer, $this->entityManager);
+        $stt = $diffusion->sendNewsLetter($check);
+
+        if ($stt === true) {
             $io->success('Articles have been imported');
             $io->success('Newsletters have been sent.');
         } else {
-            $email = new ErrorImportArticleEmail($this->mailer, $this->entityManager);
-            $email->sendEmail();
             $io->caution($checkLang . ' importation failed: ' . $check);
         }
 
         return Command::SUCCESS;
     }
-    
+
+    /**
+     * @throws Exception
+     */
     private function getArticles($lang): string
     {
         $io = new SymfonyStyle($this->input, $this->output);
@@ -115,16 +120,20 @@ class GetArticlesCommand extends Command
         $this->output->writeln('<comment>  ></comment> <info> ' . ($page + 1) . ' calls have been done.</info>');
         foreach ($this->articles as $newArticle) {
 
+            $formater = new Formater();
+            $keywords = $formater->setKeywords($newArticle->content, $lang);
+            $content = $formater->setSeoContent($newArticle->content, $keywords);
+
             $art = new Article();
             $art->setTitle($newArticle->title);
             $slug = strtolower($this->slugger->slug($newArticle->title, '-', $lang));
             $art->setUri($slug);
             $art->setLink($newArticle->link);
-            $art->setKeywords($newArticle->keywords);
+            $art->setKeywords($keywords);
             $art->setCreator($newArticle->creator);
             $art->setVideoUrl($newArticle->video_url);
             $art->setDescription($newArticle->description);
-            $art->setContent($newArticle->content);
+            $art->setContent($content);
             $art->setPubDate($newArticle->pubDate);
             $art->setImageUrl($newArticle->image_url);
             $art->setSource($newArticle->source_id);

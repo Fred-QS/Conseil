@@ -6,10 +6,10 @@
         <p>Pages count: {{ pages }}</p>
         <div class="articles-container">
             {% for article in articles %}
-                <div class="article-preview">
+                <a href="{{ path('blog_article', {_locale:app.request.getLocale(),uri: article.uri }) }}" class="article-preview">
                     <h3>{{ article.title }}</h3>
                     <div class="article-image-preview" style="background-image: url('{{ article.imageUrl }}')"></div>
-                </div>
+                </a>
             {% endfor %}
         </div>
     {% endif %}

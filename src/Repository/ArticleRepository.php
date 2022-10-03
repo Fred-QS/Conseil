@@ -68,6 +68,23 @@ class ArticleRepository extends ServiceEntityRepository
         return new Paginator($qry, true);
     }
 
+    public function getLatestArticles(string $lang): array
+    {
+        $language = ($lang === 'fr') ? 'french' : 'english';
+        $start = date("Y-m-") . '01';
+        $end = date("Y-m-") . '28';
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.pubDate BETWEEN :start AND :end')
+            ->setParameter(':start', $start)
+            ->setParameter(':end', $end)
+            ->andWhere('a.language = :lang')
+            ->setParameter('lang', $language)
+            ->orderBy('a.pubDate', 'desc')
+            ->setMaxResults(5)
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Article[] Returns an array of Article objects
 //     */

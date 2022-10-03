@@ -1,5 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {{ dump(article) }}
+    <h2>{{ article.title }}</h2>
+    <p>{{ article.keywords }}</p>
+    <br>
+    <p>{{ article.content|raw }}</p>
 {% endblock %}
