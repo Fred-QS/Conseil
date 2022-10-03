@@ -16,8 +16,6 @@ class Formater
             $keyword = str_replace("’", '', $keyword);
             if (preg_match('/^[\w.-]+$/u', $keyword)) {
                 $finals[] = $keyword;
-            } else {
-                $extracts[] = $keyword;
             }
         }
         if (count($finals) > 15) {

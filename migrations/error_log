@@ -1,0 +1,32 @@
+[01-Oct-2022 04:23:35 UTC] PHP Fatal error:  Uncaught Error: Class "Doctrine\Migrations\AbstractMigration" not found in /home/gcpv9290/perso/qs-conseil/Conseils/migrations/Version20220918105417.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/gcpv9290/perso/qs-conseil/Conseils/migrations/Version20220918105417.php on line 13
+[01-Oct-2022 04:32:29 UTC] PHP Fatal error:  Uncaught Error: Class "Doctrine\Migrations\AbstractMigration" not found in /home/gcpv9290/perso/qs-conseil/Conseils/migrations/Version20220918152710.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/gcpv9290/perso/qs-conseil/Conseils/migrations/Version20220918152710.php on line 13
+[01-Oct-2022 04:50:35 UTC] PHP Fatal error:  Uncaught Error: Class "Doctrine\Migrations\AbstractMigration" not found in /home/gcpv9290/perso/qs-conseil/Conseils/migrations/Version20220918162647.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/gcpv9290/perso/qs-conseil/Conseils/migrations/Version20220918162647.php on line 13
+[01-Oct-2022 06:43:38 UTC] PHP Fatal error:  Uncaught Error: Class "Doctrine\Migrations\AbstractMigration" not found in /home/gcpv9290/perso/qs-conseil/Conseils/migrations/Version20220921193824.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/gcpv9290/perso/qs-conseil/Conseils/migrations/Version20220921193824.php on line 13
+[01-Oct-2022 07:33:43 UTC] PHP Fatal error:  Uncaught Error: Class "Doctrine\Migrations\AbstractMigration" not found in /home/gcpv9290/perso/qs-conseil/Conseils/migrations/Version20220921194806.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/gcpv9290/perso/qs-conseil/Conseils/migrations/Version20220921194806.php on line 13
+[01-Oct-2022 17:42:33 UTC] PHP Fatal error:  Uncaught Error: Class "Doctrine\Migrations\AbstractMigration" not found in /home/gcpv9290/perso/qs-conseil/Conseils/migrations/Version20220925064254.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/gcpv9290/perso/qs-conseil/Conseils/migrations/Version20220925064254.php on line 13
+[01-Oct-2022 17:47:23 UTC] PHP Fatal error:  Uncaught Error: Class "Doctrine\Migrations\AbstractMigration" not found in /home/gcpv9290/perso/qs-conseil/Conseils/migrations/Version20220925192925.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/gcpv9290/perso/qs-conseil/Conseils/migrations/Version20220925192925.php on line 13
+[01-Oct-2022 19:17:20 UTC] PHP Fatal error:  Uncaught Error: Class "Doctrine\Migrations\AbstractMigration" not found in /home/gcpv9290/perso/qs-conseil/Conseils/migrations/Version20220925192925.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/gcpv9290/perso/qs-conseil/Conseils/migrations/Version20220925192925.php on line 13
