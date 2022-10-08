@@ -2,8 +2,9 @@
 
 {% block body %}
     {% if articles is defined %}
+        {% import '_macros/pagination.html.twig' as macro %}
         <p>Total: {{ totalItems }}</p>
-        <p>Pages count: {{ pages }}</p>
+        <p>Pages count: {{ total }}</p>
         <div class="articles-container">
             {% for article in articles %}
                 <a href="{{ path('blog_article', {_locale:app.request.getLocale(),uri: article.uri }) }}" class="article-preview">
@@ -12,5 +13,7 @@
                 </a>
             {% endfor %}
         </div>
+        {% set url = path(app.request.get('_route'), {_locale: app.request.getLocale()})~'?page='~current %}
+        {{ macro.pagination(total, current, url) }}
     {% endif %}
 {% endblock %}

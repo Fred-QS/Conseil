@@ -48,7 +48,8 @@ class ArticleController extends AbstractController
         return $this->render('article/index.html.twig', [
             'articles' => $articles,
             'totalItems' => $totalArticles,
-            'pages' => ceil(($totalArticles/10))
+            'total' => ceil(($totalArticles/10)),
+            'current' => $page
         ]);
     }
 
