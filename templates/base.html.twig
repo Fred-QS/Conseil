@@ -5,6 +5,23 @@
         <meta name="viewport"
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="description" content="{% if description is defined %}{{ description }}{% elseif article is defined %}{{ article.description }}{% else %}{{ 'site.description'|trans }}{% endif %}">
+        {% if keywords is defined %}
+            <meta name="keywords" content="{{ keywords }}">
+        {% elseif article is defined %}
+            <meta name="keywords" content="{{ article.keywords }}">
+        {% endif %}
+        <meta name="author" content="{{ 'site.name'|trans }}">
+        <meta name="robots" content="index,follow">
+        <meta name="rating" content="general">
+        <meta name="google" content="notranslate">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta property="og:title" content="{% if article is defined %}{{ article.title }} - {{ 'site.name'|trans }}{% else %}{% set route = app.request.get('_route') %}{% if route != 'home' and route != 'index' %}{{ ('route.'~splitter(route))|trans }} - {{ 'site.name'|trans }}{% else %}{{ 'site.name'|trans }}{% endif %}{% endif %}">
+        <meta property="og:description" content="{% if description is defined %}{{ description }}{% elseif article is defined %}{{ article.description }}{% else %}{{ 'site.description'|trans }}{% endif %}">
+        <meta property="og:url" content="https://qs-conseil.frederic-geffray.com/">
+        <meta property="og:type" content="website">
+        <meta property="og:locale" content="{{ app.request.getLocale() }}_{{ app.request.getLocale()|upper }}">
+        <meta property="og:site_name" content="{{ 'site.name'|trans }}">
         <title>
             {% block title %}
                 {% if article is defined %}

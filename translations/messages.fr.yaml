@@ -20,6 +20,7 @@ route:
   article: Article
 site:
   name: QS Conseil
+  description: Conseils en architecture des systèmes d'information | Développement d'application web, mobile et bureau.
 label:
   rights: Tout droit réservé
   essential: Essentiel

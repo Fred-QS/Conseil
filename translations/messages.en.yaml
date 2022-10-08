@@ -20,6 +20,7 @@ route:
   article: Article
 site:
   name: QS Consulting
+  description: Information systems architecture consulting | Development of web, mobile and desktop applications.
 label:
   rights: All rights reserved
   essential: Essential
