@@ -29,6 +29,18 @@ label:
   subject: Choisir le sujet de votre message
   message: Votre message
   submit: Envoyer
+  page: Page
+  of: sur
+  search:
+    query: Votre recherche
+    order: Trier par
+    desc: Plus récent
+    asc: Plus ancien
+    category: Catégorie
+    science: Science
+    technology: Technologie
+    all: Toutes les catégories
+    submit: Rechercher
 contact:
   subject_first: Premier sujet
   subject_second: Second sujet

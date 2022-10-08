@@ -40,15 +40,20 @@ class ArticleRepository extends ServiceEntityRepository
         }
     }
 
-    public function findAllByOrderDesc(string $lang, int $page, ?string $category, ?string $orderBy): Paginator
+    public function findAllByOrderDesc(string $lang, int $page, ?string $category, ?string $orderBy, ?string $query): Paginator
     {
         $pageSize = 10;
         $firstResult = ($page - 1) * $pageSize;
         $language = ($lang === 'fr') ? 'french' : 'english';
 
-        $qry = $this->createQueryBuilder('a')
-            ->andWhere('a.language = :language')
-            ->setParameter('language', $language);
+        $qry = $this->createQueryBuilder('a');
+
+        if ($query !== null) {
+            $qry->andWhere('a.content LIKE :query')
+                ->orWhere('a.title LIKE :query')
+                ->orWhere('a.description LIKE :query')
+                ->setParameter('query', '%' . $query . '%');
+        }
 
         if ($category !== null) {
             $qry->andWhere('a.category LIKE :category')
@@ -61,7 +66,9 @@ class ArticleRepository extends ServiceEntityRepository
             $qry->orderBy('a.id', 'desc');
         }
 
-        $qry->setFirstResult($firstResult)
+        $qry->andWhere('a.language = :language')
+            ->setParameter('language', $language)
+            ->setFirstResult($firstResult)
             ->setMaxResults($pageSize)
             ->getQuery();
 

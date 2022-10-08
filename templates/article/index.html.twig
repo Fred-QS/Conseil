@@ -2,9 +2,33 @@
 
 {% block body %}
     {% if articles is defined %}
+        <form method="get">
+            <label>
+                <span>{{ 'label.search.query'|trans }}</span>
+                <input type="text" name="qry" value="{% if qry is not null %}{{ qry }}{% endif %}">
+            </label>
+            <label>
+                <span>{{ 'label.search.order'|trans }}</span>
+                <select name="order">
+                    <option {% if order|lower is same as 'desc' %}selected{% endif %} value="desc">{{ 'label.search.desc'|trans }}</option>
+                    <option {% if order|lower is same as 'asc' %}selected{% endif %} value="asc">{{ 'label.search.asc'|trans }}</option>
+                </select>
+            </label>
+            <label>
+                <span>{{ 'label.search.category'|trans }}</span>
+                <select name="category">
+                    <option {% if category|lower is same as 'all' %}selected{% endif %} value="all">{{ 'label.search.all'|trans }}</option>
+                    <option {% if category|lower is same as 'science' %}selected{% endif %} value="science">{{ 'label.search.science'|trans }}</option>
+                    <option {% if category|lower is same as 'technology' %}selected{% endif %} value="technology">{{ 'label.search.technology'|trans }}</option>
+                </select>
+            </label>
+            <button type="submit">{{ 'label.search.submit'|trans }}</button>
+        </form>
         {% import '_macros/pagination.html.twig' as macro %}
-        <p>Total: {{ totalItems }}</p>
-        <p>Pages count: {{ total }}</p>
+        <p>{{ totalItems > 1 ? totalItems ~ ' articles' : totalItems ~ ' article' }}</p>
+        {% if total > 1 %}
+            <p>{{ 'label.page'|trans }} {{ page }} {{ 'label.of'|trans }} {{ total }}</p>
+        {% endif %}
         <div class="articles-container">
             {% for article in articles %}
                 <a href="{{ path('blog_article', {_locale:app.request.getLocale(),uri: article.uri }) }}" class="article-preview">
@@ -13,7 +37,7 @@
                 </a>
             {% endfor %}
         </div>
-        {% set url = path(app.request.get('_route'), {_locale: app.request.getLocale()})~'?page='~current %}
-        {{ macro.pagination(total, current, url) }}
+        {% set url = path(app.request.get('_route'), {_locale: app.request.getLocale()}) %}
+        {{ macro.pagination(total, current, url, category, order, qry) }}
     {% endif %}
 {% endblock %}

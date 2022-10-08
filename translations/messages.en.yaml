@@ -29,6 +29,18 @@ label:
   subject: Select your message's subject
   message: Your message
   submit: Send
+  page: Page
+  of: of
+  search:
+    query: Your search
+    order: Filter by
+    desc: Recent
+    asc: Older
+    category: Category
+    science: Science
+    technology: Technology
+    all: All categories
+    submit: Search
 contact:
   subject_first: First subject
   subject_second: Second subject

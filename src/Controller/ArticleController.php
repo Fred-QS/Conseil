@@ -27,29 +27,30 @@ class ArticleController extends AbstractController
     {
         $locale = $request->getLocale();
         $page = 1;
-        $category = null;
-        $orderBy = 'DESC';
+        $category = 'all';
+        $orderBy = 'desc';
+        $qry = null;
 
         if ($request->get('page') !== null) {
             $page = (int) $request->get('page');
         }
 
-        if ($request->get('category') !== null) {
-            $category = $request->get('category');
-        }
+        $category = ($request->get('category') !== 'all') ? $request->get('category') : null;
+        $orderBy = $request->get('order');
+        $qry = $request->get('qry');
 
-        if ($request->get('order') !== null) {
-            $orderBy = $request->get('order');
-        }
-
-        $articles = $this->entityManager->getRepository(Article::class)->findAllByOrderDesc($locale, $page, $category, $orderBy);
+        $articles = $this->entityManager->getRepository(Article::class)->findAllByOrderDesc($locale, $page, $category, $orderBy, $qry);
         $totalArticles = count($articles);
 
         return $this->render('article/index.html.twig', [
             'articles' => $articles,
             'totalItems' => $totalArticles,
             'total' => ceil(($totalArticles/10)),
-            'current' => $page
+            'current' => $page,
+            'category' => $category,
+            'order' => $orderBy,
+            'qry' => $qry,
+            'page' => $page
         ]);
     }
 
