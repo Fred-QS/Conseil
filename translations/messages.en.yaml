@@ -42,6 +42,7 @@ label:
     technology: Technology
     all: All categories
     submit: Search
+  published: Published at
 contact:
   subject_first: First subject
   subject_second: Second subject

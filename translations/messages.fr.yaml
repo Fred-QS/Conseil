@@ -42,6 +42,7 @@ label:
     technology: Technologie
     all: Toutes les catégories
     submit: Rechercher
+  published: Publié le
 contact:
   subject_first: Premier sujet
   subject_second: Second sujet
