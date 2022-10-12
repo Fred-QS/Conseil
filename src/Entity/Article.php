@@ -57,6 +57,9 @@ class Article
     #[ORM\Column(length: 255)]
     private ?string $uri = null;
 
+    #[ORM\Column]
+    private ?bool $published = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -237,6 +240,18 @@ class Article
     public function setUri(string $uri): self
     {
         $this->uri = $uri;
+
+        return $this;
+    }
+
+    public function isPublished(): ?bool
+    {
+        return $this->published;
+    }
+
+    public function setPublished(bool $published): self
+    {
+        $this->published = $published;
 
         return $this;
     }

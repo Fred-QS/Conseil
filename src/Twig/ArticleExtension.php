@@ -21,8 +21,21 @@ class ArticleExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            //new TwigFunction('function_name', [$this, 'doSomething']),
+            new TwigFunction('display_categories', [$this, 'displayCategories']),
         ];
+    }
+
+    public function displayCategories(string $cats): array
+    {
+        $array = explode(',', $cats);
+        $final = [];
+        foreach ($array as $item) {
+            $final[] = ucfirst(trim($item));
+        }
+        if (count($final) > 1) {
+            return ['label' => 'label.categories', 'data' => implode(', ', $final)];
+        }
+        return ['label' => 'label.category', 'data' => implode(', ', $final)];
     }
 
     public function splitContent($value): array

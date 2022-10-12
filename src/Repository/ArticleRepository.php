@@ -66,7 +66,8 @@ class ArticleRepository extends ServiceEntityRepository
             $qry->orderBy('a.id', 'desc');
         }
 
-        $qry->andWhere('a.language = :language')
+        $qry->andWhere('a.published = 1')
+            ->andWhere('a.language = :language')
             ->setParameter('language', $language)
             ->setFirstResult($firstResult)
             ->setMaxResults($pageSize)
@@ -86,34 +87,46 @@ class ArticleRepository extends ServiceEntityRepository
             ->setParameter(':end', $end)
             ->andWhere('a.language = :lang')
             ->setParameter('lang', $language)
+            ->andWhere('a.published = 1')
             ->orderBy('a.pubDate', 'desc')
-            ->setMaxResults(5)
+            ->setMaxResults(3)
             ->getQuery()
             ->getResult();
     }
 
-//    /**
-//     * @return Article[] Returns an array of Article objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('a.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function getUnverifiedArticles(string $lang): array
+    {
+        $language = ($lang === 'fr') ? 'french' : 'english';
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.language = :lang')
+            ->setParameter('lang', $language)
+            ->andWhere('a.published = 0')
+            ->orderBy('a.pubDate', 'desc')
+            ->getQuery()
+            ->getResult();
+    }
 
-//    public function findOneBySomeField($value): ?Article
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    public function getCategories(string $lang): array
+    {
+        $language = ($lang === 'fr') ? 'french' : 'english';
+        $categories = $this->createQueryBuilder('a')
+            ->select("a.category")
+            ->andWhere('a.published = 1')
+            ->andWhere('a.language = :language')
+            ->setParameter('language', $language)
+            ->groupBy("a.category")
+            ->getQuery()
+            ->getResult();
+        $final = [];
+        foreach ($categories as $category) {
+            $split = explode(',', $category['category']);
+            foreach ($split as $item) {
+                $cat = trim($item);
+                if (!in_array($cat, $final, true)) {
+                    $final[] = $cat;
+                }
+            }
+        }
+        return $final;
+    }
 }

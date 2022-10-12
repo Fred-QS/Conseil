@@ -32,4 +32,20 @@ class Diffusion
         $email->sendEmail($state);
         return false;
     }
+
+    /**
+     * @throws TransportExceptionInterface
+     */
+    public function sendVerifyArticles(string $state): bool
+    {
+        if ($state === 'ok') {
+            $email = new ArticleVerificationMailer($this->mailer, $this->entityManager);
+            $email->sendEmail();
+            return true;
+        }
+
+        $email = new ErrorImportArticleEmail($this->mailer, $this->entityManager);
+        $email->sendEmail($state);
+        return false;
+    }
 }

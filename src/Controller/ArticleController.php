@@ -40,6 +40,7 @@ class ArticleController extends AbstractController
         $qry = $request->get('qry');
 
         $articles = $this->entityManager->getRepository(Article::class)->findAllByOrderDesc($locale, $page, $category, $orderBy, $qry);
+        $categories = $this->entityManager->getRepository(Article::class)->getCategories($locale);
         $totalArticles = count($articles);
 
         return $this->render('article/index.html.twig', [
@@ -50,7 +51,8 @@ class ArticleController extends AbstractController
             'category' => $category,
             'order' => $orderBy,
             'qry' => $qry,
-            'page' => $page
+            'page' => $page,
+            'categories' => $categories
         ]);
     }
 

@@ -18,8 +18,9 @@
                 <span>{{ 'label.search.category'|trans }}</span>
                 <select name="category">
                     <option {% if category|lower is same as 'all' %}selected{% endif %} value="all">{{ 'label.search.all'|trans }}</option>
-                    <option {% if category|lower is same as 'science' %}selected{% endif %} value="science">{{ 'label.search.science'|trans }}</option>
-                    <option {% if category|lower is same as 'technology' %}selected{% endif %} value="technology">{{ 'label.search.technology'|trans }}</option>
+                    {% for cat in categories %}
+                        <option {% if category|lower is same as cat %}selected{% endif %} value="{{ cat }}">{{ ('label.search.' ~ cat)|trans }}</option>
+                    {% endfor %}
                 </select>
             </label>
             <button type="submit">{{ 'label.search.submit'|trans }}</button>

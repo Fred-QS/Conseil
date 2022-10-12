@@ -1,0 +1,27 @@
+{% extends 'emails/base-newsletter.html.twig' %}
+
+{% block body %}
+    <h1>Bonjour</h1>
+
+    <p>
+        {{ message }}
+    </p>
+    <br>
+    <p>
+        Articles FR :
+    </p>
+    <ul>
+        {% for article in articlesFr %}
+            <li>{{ article.title }}</li>
+        {% endfor %}
+    </ul>
+    <br>
+    <p>
+        Articles EN :
+    </p>
+    <ul>
+        {% for article in articlesEn %}
+            <li>{{ article.title }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

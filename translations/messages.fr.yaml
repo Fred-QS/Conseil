@@ -32,6 +32,10 @@ label:
   submit: Envoyer
   page: Page
   of: sur
+  on: sur
+  author: Auteur
+  category: Catégorie
+  categories: Catégories
   search:
     query: Votre recherche
     order: Trier par
@@ -40,6 +44,15 @@ label:
     category: Catégorie
     science: Science
     technology: Technologie
+    top: Actu
+    environment: Environnement
+    business: Business
+    entertainment: Divertissement
+    food: Alimentation
+    health: Santé
+    politics: Politique
+    sports: Sports
+    world: Internationnal
     all: Toutes les catégories
     submit: Rechercher
   published: Publié le

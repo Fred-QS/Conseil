@@ -3,13 +3,10 @@
 {% block body %}
     <h2>{{ article.title }}</h2>
     <small>
-        {% if article.creator is defined and article.creator is not same as '' %}
-            {{ article.creator }}  ({{ article.source|upper }})
-        {% else %}
-            {{ article.source|upper }}
-        {% endif %}
-        {{ 'label.published'|trans }} {{ app.request.getLocale() == 'fr' ? article.pubDate|date("d/m/Y") : article.pubDate|date("Y/m/d") }}
+        {{ 'label.published'|trans }} {{ app.request.getLocale() == 'fr' ? article.pubDate|date("d/m/Y") : article.pubDate|date("Y/m/d") }} {{ 'label.on'|trans }} {{ article.source|upper }}
     </small>
+    {% set categories = display_categories(article.category) %}
+    <small>{{ categories.label|trans }}: {{ categories.data }}</small>
     <br>
     <img style="width: 100%;" src="{{ article.imageUrl }}" alt="{{ article.title }}">
     <br>
@@ -17,4 +14,23 @@
     <p>{{ split[0]|raw }}</p>
     <br>
     <p>{{ split[1]|raw }}</p>
+    <br>
+    <small>
+        {% if article.creator is defined and article.creator is not same as '' %}
+            {{ 'label.author'|trans }}: {{ article.creator }}
+        {% else %}
+            Source: {{ article.source|upper }}
+        {% endif %}
+    </small>
+    <div class="rs-article-container">
+        <a href="https://www.facebook.com/sharer/sharer.php?kid_directed_site=0&sdk=joey&u={{ app.request.uri }}&display=popup&ref=plugin&src=share_button" target="_blank" class="article-rs-icons">
+            <i class="fa-brands fa-square-facebook fa-2xl"></i>
+        </a>
+        <a href="https://linkedin.com/shareArticle?url={{ app.request.uri }}" target="_blank" class="article-rs-icons">
+            <i class="fa-brands fa-linkedin fa-2xl"></i>
+        </a>
+        <a href="https://twitter.com/intent/tweet?url={{ app.request.uri }}" target="_blank" class="article-rs-icons">
+            <i class="fa-brands fa-twitter-square fa-2xl"></i>
+        </a>
+    </div>
 {% endblock %}

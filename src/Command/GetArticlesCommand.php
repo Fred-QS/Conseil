@@ -72,11 +72,11 @@ class GetArticlesCommand extends Command
         }
 
         $diffusion = new Diffusion($this->mailer, $this->entityManager);
-        $stt = $diffusion->sendNewsLetter($check);
+        $stt = $diffusion->sendVerifyArticles($check);
 
         if ($stt === true) {
             $io->success('Articles have been imported');
-            $io->success('Newsletters have been sent.');
+            $io->success('Articles verification articles have been sent.');
         } else {
             $io->caution($checkLang . ' importation failed: ' . $check);
         }

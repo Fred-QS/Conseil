@@ -5,67 +5,71 @@
 
     {% apply spaceless %}
         {% if total > 1 %}
-            <div class="row">
-                <div class="col-md-12 blog-posts">
-                    <nav>
-                        <ul class="pagination theme-colored2">
-                            {% if current > 1 %}
-                                <li>
-                                    <a class="prev page-numbers" href="{{ url }}?page={{ (current-1) }}{{ filters }}">&laquo;</a>
-                                </li>
-                            {% endif %}
+            <div class="pagination-container">
+                <ul class="pagination-list">
+                    {% if current > 1 %}
+                        <li>
+                            <a class="prev page-numbers" href="{{ url }}?page={{ (current-1) }}{{ filters }}">
+                                <i class="fa-solid fa-backward"></i>
+                            </a>
+                        </li>
+                    {% endif %}
 
-                            {% for i in 1..total %}
-                                {% if 0 == (current - nearbyPagesLimit) - loop.index %}
+                    {% for i in 1..total %}
+                        {% if 0 == (current - nearbyPagesLimit) - loop.index %}
+                            <li>
+                                <a class="page-numbers" href="{{ url }}?page=1{{ filters }}">1</a>
+                            </li>
+                            {% if 1 != loop.index %}
+                                <li>
+                                    <span class="page-numbers">
+                                        <i class="fa-solid fa-ellipsis"></i>
+                                    </span>
+                                </li>
+                            {% endif %}
+                        {% elseif 0 == (current + nearbyPagesLimit) - loop.index  and (current + nearbyPagesLimit) < total %}
+                            <li>
+                                <span class="page-numbers">
+                                    <i class="fa-solid fa-ellipsis"></i>
+                                </span>
+                            </li>
+                        {% elseif 0 < (current - nearbyPagesLimit) - loop.index %}
+                            <!-- #1 -->
+                        {% elseif 0 > (current + nearbyPagesLimit) - loop.index %}
+                            <!-- #2 -->
+                        {% else %}
+                            {% if current == loop.index  %}
+                                <li class="active">
+                                    <a href="{{ url }}?page={{ loop.index }}{{ filters }}">
+                                        <span class="page-numbers" aria-current="page">{{ loop.index }}</span>
+                                    </a>
+                                </li>
+                            {% else %}
+                                {% if loop.index == 1 %}
                                     <li>
-                                        <a class="page-numbers" href="{{ url }}?page=1{{ filters }}">1</a>
+                                        <a class="page-numbers" href="{{ url }}?page={{ loop.index }}{{ filters }}">{{ loop.index }}</a>
                                     </li>
-                                    {% if 1 != loop.index %}
-                                        <li>
-                                            <span class="page-numbers">...</span>
-                                        </li>
-                                    {% endif %}
-                                {% elseif 0 == (current + nearbyPagesLimit) - loop.index  and (current + nearbyPagesLimit) < total %}
-                                    <li>
-                                        <span class="page-numbers">...</span>
-                                    </li>
-                                {% elseif 0 < (current - nearbyPagesLimit) - loop.index %}
-                                    <!-- #1 -->
-                                {% elseif 0 > (current + nearbyPagesLimit) - loop.index %}
-                                    <!-- #2 -->
                                 {% else %}
-                                    {% if current == loop.index  %}
-                                        <li class="active">
-                                            <a href="{{ url }}?page={{ loop.index }}{{ filters }}">
-                                                <span class="page-numbers" aria-current="page">{{ loop.index }}</span>
-                                            </a>
-                                        </li>
-                                    {% else %}
-                                        {% if loop.index == 1 %}
-                                            <li>
-                                                <a class="page-numbers" href="{{ url }}?page={{ loop.index }}{{ filters }}">{{ loop.index }}</a>
-                                            </li>
-                                        {% else %}
-                                            <li>
-                                                <a class="page-numbers" href="{{ url }}?page={{ loop.index }}{{ filters }}">{{ loop.index }}</a>
-                                            </li>
-                                        {% endif %}
-                                    {% endif %}
+                                    <li>
+                                        <a class="page-numbers" href="{{ url }}?page={{ loop.index }}{{ filters }}">{{ loop.index }}</a>
+                                    </li>
                                 {% endif %}
-                            {% endfor %}
-                            {% if current != total  and (current + nearbyPagesLimit) < total %}
-                                <li>
-                                    <a class="page-numbers" href="{{ url }}?page={{ total }}{{ filters }}">{{ total }}</a>
-                                </li>
                             {% endif %}
-                            {% if current < total %}
-                                <li>
-                                    <a class="next page-numbers" href="{{ url }}?page={{ (current+1) }}{{ filters }}">&raquo;</a>
-                                </li>
-                            {% endif %}
-                        </ul>
-                    </nav>
-                </div>
+                        {% endif %}
+                    {% endfor %}
+                    {% if current != total  and (current + nearbyPagesLimit) < total %}
+                        <li>
+                            <a class="page-numbers" href="{{ url }}?page={{ total }}{{ filters }}">{{ total }}</a>
+                        </li>
+                    {% endif %}
+                    {% if current < total %}
+                        <li>
+                            <a class="next page-numbers" href="{{ url }}?page={{ (current+1) }}{{ filters }}">
+                                <i class="fa-solid fa-forward"></i>
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
             </div>
         {% endif %}
     {% endapply %}
