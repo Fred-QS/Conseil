@@ -3,6 +3,7 @@
 namespace App\SeoStrategy;
 
 use App\Entity\Article;
+use App\Mail\ArticleVerificationMailer;
 use App\Mail\ErrorImportArticleEmail;
 use App\Mail\NewsletterMailer;
 use Doctrine\ORM\EntityManagerInterface;
