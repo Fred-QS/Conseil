@@ -18,6 +18,7 @@ route:
   training: Training
   application: Applications
   article: Article
+  login: Sign in
 site:
   name: QS Consulting
   description: Information systems architecture consulting | Development of web, mobile and desktop applications.
@@ -27,6 +28,7 @@ label:
   information: Information
   name: Your fullname / society
   email: Your email
+  password: Your password
   subject: Select your message's subject
   message: Your message
   submit: Send
@@ -36,6 +38,10 @@ label:
   author: Author
   category: Category
   categories: Categories
+  login: Sign in
+  logout: Logout
+  logged_as: Your are connected as
+  please_sign_in: Please sign in
   search:
     query: Your search
     order: Filter by

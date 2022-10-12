@@ -1,1 +1,0 @@
-[30-Sep-2022 14:56:11 UTC] 2022-09-30T14:56:11+00:00 [info] User Deprecated: The "Symfony\Component\Console\Command\Command::$defaultName" property is considered final. You should not override it in "App\Command\GetArticlesCommand".

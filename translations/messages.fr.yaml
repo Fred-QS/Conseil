@@ -18,6 +18,7 @@ route:
   training: Formations
   application: Applications
   article: Article
+  login: Connexion
 site:
   name: QS Conseil
   description: Conseils en architecture des systèmes d'information | Développement d'application web, mobile et bureau.
@@ -27,6 +28,7 @@ label:
   information: Informations
   name: Votre nom / société
   email: Votre email
+  password: Votre mot de passe
   subject: Choisir le sujet de votre message
   message: Votre message
   submit: Envoyer
@@ -36,6 +38,10 @@ label:
   author: Auteur
   category: Catégorie
   categories: Catégories
+  login: Connectez-vous
+  logout: Déconnexion
+  logged_as: Vous êtes connecté en tant que
+  please_sign_in: Merci de vous connecter
   search:
     query: Votre recherche
     order: Trier par
