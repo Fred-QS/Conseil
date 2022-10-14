@@ -14,11 +14,18 @@ class Block
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::TEXT)]
-    private ?string $content = null;
-
     #[ORM\ManyToOne(inversedBy: 'blocks')]
-    private ?Section $section = null;
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Page $page = null;
+
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $contentFr = null;
+
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $contentEn = null;
+
+    #[ORM\Column]
+    private ?int $sectionType = null;
 
     #[ORM\Column]
     private ?int $ordering = null;
@@ -28,26 +35,50 @@ class Block
         return $this->id;
     }
 
-    public function getContent(): ?string
+    public function getPage(): ?Page
     {
-        return $this->content;
+        return $this->page;
     }
 
-    public function setContent(string $content): self
+    public function setPage(?Page $page): self
     {
-        $this->content = $content;
+        $this->page = $page;
 
         return $this;
     }
 
-    public function getSection(): ?Section
+    public function getContentFr(): ?string
     {
-        return $this->section;
+        return $this->contentFr;
     }
 
-    public function setSection(?Section $section): self
+    public function setContentFr(string $contentFr): self
     {
-        $this->section = $section;
+        $this->contentFr = $contentFr;
+
+        return $this;
+    }
+
+    public function getContentEn(): ?string
+    {
+        return $this->contentEn;
+    }
+
+    public function setContentEn(string $contentEn): self
+    {
+        $this->contentEn = $contentEn;
+
+        return $this;
+    }
+
+    public function getSectionType(): ?int
+    {
+        return $this->sectionType;
+    }
+
+    public function setSectionType(int $sectionType): self
+    {
+        $this->sectionType = $sectionType;
 
         return $this;
     }

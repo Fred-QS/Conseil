@@ -140,6 +140,7 @@ class GetArticlesCommand extends Command
             $art->setCountry($newArticle->country);
             $art->setCategory($newArticle->category);
             $art->setLanguage($newArticle->language);
+            $art->setPublished(0);
             
             $this->entityManager->persist($art);
             $this->entityManager->flush();

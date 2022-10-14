@@ -82,3 +82,61 @@ errors:
   title: Erreur
   not_found: Page non trouvée
   back: Retour à la page d'accueil
+page:
+  home:
+    keywords: Qs Conseil,accueil
+    description: QS Conseil - Accueil
+  skill:
+    keywords: Qs Conseil,skills
+    description: QS Conseil - Skills
+  reference:
+    keywords: Qs Conseil,références
+    description: QS Conseil - Références
+  service:
+    keywords: Qs Conseil,services
+    description: QS Conseil - Services
+  info_terms:
+    keywords: Qs Conseil,conditions,générale,utilisation
+    description: QS Conseil - Conditions générales
+  info_gdpr:
+    keywords: Qs Conseil,rgpd
+    description: QS Conseil - RGPD
+  info_plan:
+    keywords: Qs Conseil,plan,site
+    description: QS Conseil - Plan du site
+  blog:
+    keywords: Qs Conseil,it news,blog,articles
+    description: QS Conseil - IT News
+  skill_iot:
+    keywords: Qs Conseil,iot,skills
+    description: QS Conseil - IoT
+  skill_consulting:
+    keywords: Qs Conseil,conseil,skills
+    description: QS Conseil - Conseil
+  development:
+    keywords: Qs Conseil,développement,web
+    description: QS Conseil - Développement
+  web:
+    keywords: Qs Conseil,site,site web
+    description: QS Conseil - Web
+  mobile:
+    keywords: Qs Conseil,applications mobiles
+    description: QS Conseil - Applications mobiles
+  desktop:
+    keywords: Qs Conseil,application bureau,logiciels
+    description: QS Conseil - Applications de bureau
+  training:
+    keywords: Qs Conseil,contact,formations,éducation
+    description: QS Conseil - Formations
+  application:
+    keywords: Qs Conseil,applications,webapp
+    description: QS Conseil - Applications
+  services_iot:
+    keywords: Qs Conseil,iot,services
+    description: QS Conseil - IoT
+  services_consulting:
+    keywords: Qs Conseil,conseil,services
+    description: QS Conseil - Conseil
+  contact:
+    keywords: Qs Conseil,contact
+    description: QS Conseil - Contact

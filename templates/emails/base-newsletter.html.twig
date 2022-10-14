@@ -1,5 +1,9 @@
 <!DOCTYPE html>
-<html lang="{{ lang }}_{{ lang|upper }}">
+{% if lang is defined %}
+    <html lang="{{ lang }}_{{ lang|upper }}">
+{% else %}
+    <html lang="fr_FR">
+{% endif %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"

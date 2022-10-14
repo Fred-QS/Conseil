@@ -24,14 +24,6 @@ class Section
     #[ORM\Column]
     private array $settings = [];
 
-    #[ORM\OneToMany(mappedBy: 'section', targetEntity: Block::class)]
-    private Collection $blocks;
-
-    public function __construct()
-    {
-        $this->blocks = new ArrayCollection();
-    }
-
     public function getId(): ?int
     {
         return $this->id;
@@ -69,36 +61,6 @@ class Section
     public function setSettings(array $settings): self
     {
         $this->settings = $settings;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Block>
-     */
-    public function getBlocks(): Collection
-    {
-        return $this->blocks;
-    }
-
-    public function addBlock(Block $block): self
-    {
-        if (!$this->blocks->contains($block)) {
-            $this->blocks->add($block);
-            $block->setSection($this);
-        }
-
-        return $this;
-    }
-
-    public function removeBlock(Block $block): self
-    {
-        if ($this->blocks->removeElement($block)) {
-            // set the owning side to null (unless already changed)
-            if ($block->getSection() === $this) {
-                $block->setSection(null);
-            }
-        }
 
         return $this;
     }

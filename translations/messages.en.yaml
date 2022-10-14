@@ -82,3 +82,61 @@ errors:
   title: Error
   not_found: Page not found
   back: Back to home page
+page:
+  home:
+    keywords: Qs Consulting,home
+    description: QS Consulting - Home page.
+  skill:
+    keywords: Qs Consulting,skills
+    description: QS Consulting - Skills page.
+  reference:
+    keywords: Qs Consulting,reference
+    description: QS Consulting - References page.
+  service:
+    keywords: Qs Consulting,services
+    description: QS Consulting - Services page.
+  info_terms:
+    keywords: Qs Consulting,terms
+    description: QS Consulting - Terms of use page.
+  info_gdpr:
+    keywords: Qs Consulting,gdpr
+    description: QS Consulting - GDPR page.
+  info_plan:
+    keywords: Qs Consulting,site map
+    description: QS Consulting - Site map page.
+  blog:
+    keywords: Qs Consulting,it news,blog,articles
+    description: QS Consulting - IT News page.
+  skill_iot:
+    keywords: Qs Consulting,iot,skills
+    description: QS Consulting - IoT skills page.
+  skill_consulting:
+    keywords: Qs Consulting,consulting,skills
+    description: QS Consulting - Consulting skills page.
+  development:
+    keywords: Qs Consulting,development
+    description: QS Consulting - Development page.
+  web:
+    keywords: Qs Consulting,web sites
+    description: QS Consulting - Web page.
+  mobile:
+    keywords: Qs Consulting,mobile app
+    description: QS Consulting - Mobile app page.
+  desktop:
+    keywords: Qs Consulting,desktop app
+    description: QS Consulting - Desktop App page.
+  training:
+    keywords: Qs Consulting,training,session,education
+    description: QS Consulting - Training page.
+  application:
+    keywords: Qs Consulting,applications,webapp
+    description: QS Consulting - Applications page.
+  services_iot:
+    keywords: Qs Consulting,iot,services
+    description: QS Consulting - IoT services page.
+  services_consulting:
+    keywords: Qs Consulting,consulting,services
+    description: QS Consulting - Consulting services page.
+  contact:
+    keywords: Qs Consulting,contact,message
+    description: QS Consulting - Contact page.
