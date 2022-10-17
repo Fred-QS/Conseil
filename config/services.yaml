@@ -30,3 +30,7 @@ services:
         $newsdataUrl: '%env(NEWSDATA_URL)%'
         $newsdataKey: '%env(NEWSDATA_KEY)%'
         $newsdataCategories: '%env(NEWSDATA_CATEGORY)%'
+
+    App\Builder\SectionBuilder:
+        arguments:
+            - '%kernel.project_dir%'

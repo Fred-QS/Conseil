@@ -27,16 +27,13 @@ class ArticleController extends AbstractController
     {
         $locale = $request->getLocale();
         $page = 1;
-        $category = 'all';
-        $orderBy = 'desc';
-        $qry = null;
 
         if ($request->get('page') !== null) {
             $page = (int) $request->get('page');
         }
 
         $category = ($request->get('category') !== 'all') ? $request->get('category') : null;
-        $orderBy = $request->get('order');
+        $orderBy = $request->get('order') ?? 'desc';
         $qry = $request->get('qry');
 
         $articles = $this->entityManager->getRepository(Article::class)->findAllByOrderDesc($locale, $page, $category, $orderBy, $qry);
@@ -52,7 +49,10 @@ class ArticleController extends AbstractController
             'order' => $orderBy,
             'qry' => $qry,
             'page' => $page,
-            'categories' => $categories
+            'categories' => $categories,
+            'description' => 'page.blog.description',
+            'keywords' => 'page.blog.keywords',
+            'image' => '/uploads/pages/test.jpg'
         ]);
     }
 
@@ -62,8 +62,12 @@ class ArticleController extends AbstractController
         $lang = ($request->getLocale() === 'fr') ? 'french' : 'english';
         /* @var Article $article */
         $article = $this->entityManager->getRepository(Article::class)->findOneBy(['uri' => $uri, 'language' => $lang]);
+        $previous = $this->entityManager->getRepository(Article::class)->getPreviousArticle($article->getId(), $lang);
+        $next = $this->entityManager->getRepository(Article::class)->getNextArticle($article->getId(), $lang);
         return $this->render('article/article.html.twig', [
-            'article' => $article
+            'article' => $article,
+            'previous' => $previous,
+            'next' => $next
         ]);
     }
 }

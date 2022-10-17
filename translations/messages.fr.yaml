@@ -62,6 +62,8 @@ label:
     all: Toutes les catégories
     submit: Rechercher
   published: Publié le
+  previous_article: Article précédent
+  next_article: Article suivant
 contact:
   subject_first: Premier sujet
   subject_second: Second sujet

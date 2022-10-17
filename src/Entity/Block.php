@@ -14,9 +14,17 @@ class Block
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'blocks')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Page $page = null;
+    #[ORM\Column]
+    private ?int $section = null;
+
+    #[ORM\Column]
+    private ?int $sectionOrder = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $page = null;
+
+    #[ORM\Column]
+    private ?int $blockOrder = null;
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $contentFr = null;
@@ -24,25 +32,58 @@ class Block
     #[ORM\Column(type: Types::TEXT)]
     private ?string $contentEn = null;
 
-    #[ORM\Column]
-    private ?int $sectionType = null;
-
-    #[ORM\Column]
-    private ?int $ordering = null;
+    #[ORM\Column(length: 255)]
+    private ?string $module = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getPage(): ?Page
+    public function getSection(): ?int
+    {
+        return $this->section;
+    }
+
+    public function setSection(int $section): self
+    {
+        $this->section = $section;
+
+        return $this;
+    }
+
+    public function getSectionOrder(): ?int
+    {
+        return $this->sectionOrder;
+    }
+
+    public function setSectionOrder(int $sectionOrder): self
+    {
+        $this->sectionOrder = $sectionOrder;
+
+        return $this;
+    }
+
+    public function getPage(): ?string
     {
         return $this->page;
     }
 
-    public function setPage(?Page $page): self
+    public function setPage(string $page): self
     {
         $this->page = $page;
+
+        return $this;
+    }
+
+    public function getBlockOrder(): ?int
+    {
+        return $this->blockOrder;
+    }
+
+    public function setBlockOrder(int $blockOrder): self
+    {
+        $this->blockOrder = $blockOrder;
 
         return $this;
     }
@@ -71,26 +112,14 @@ class Block
         return $this;
     }
 
-    public function getSectionType(): ?int
+    public function getModule(): ?string
     {
-        return $this->sectionType;
+        return $this->module;
     }
 
-    public function setSectionType(int $sectionType): self
+    public function setModule(string $module): self
     {
-        $this->sectionType = $sectionType;
-
-        return $this;
-    }
-
-    public function getOrdering(): ?int
-    {
-        return $this->ordering;
-    }
-
-    public function setOrdering(int $ordering): self
-    {
-        $this->ordering = $ordering;
+        $this->module = $module;
 
         return $this;
     }

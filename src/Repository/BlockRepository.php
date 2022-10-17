@@ -39,20 +39,18 @@ class BlockRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Block[] Returns an array of Block objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('b')
-//            ->andWhere('b.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('b.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    /**
+     * @return Block[] Returns an array of Block objects
+     */
+    public function getPageBlocks(string $page): array
+    {
+        return $this->createQueryBuilder('b')
+            ->andWhere('b.page = :page')
+            ->setParameter('page', $page)
+            ->orderBy('b.sectionOrder', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
 
 //    public function findOneBySomeField($value): ?Block
 //    {

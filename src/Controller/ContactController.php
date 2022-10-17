@@ -60,6 +60,9 @@ class ContactController extends AbstractController
 
         return $this->render('contact/index.html.twig', [
             'form' => $form->createView(),
+            'description' => 'page.contact.description',
+            'keywords' => 'page.contact.keywords',
+            'image' => '/uploads/pages/test.jpg'
         ]);
     }
 }

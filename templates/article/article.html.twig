@@ -33,4 +33,12 @@
             <i class="fa-brands fa-twitter-square fa-2xl"></i>
         </a>
     </div>
+    <div class="other-articles">
+        {% if previous is not null %}
+            <a class="btn" href="{{ path('blog_article', {_locale:app.request.getLocale(),uri: previous.uri }) }}" title="{{ previous.title }}">{{ 'label.previous_article'|trans }}</a>
+        {% endif %}
+        {% if next is not null %}
+            <a class="btn" href="{{ path('blog_article', {_locale:app.request.getLocale(),uri: next.uri }) }}" title="{{ next.title }}">{{ 'label.next_article'|trans }}</a>
+        {% endif %}
+    </div>
 {% endblock %}

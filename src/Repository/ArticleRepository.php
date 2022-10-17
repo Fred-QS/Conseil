@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Article;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
@@ -128,5 +129,39 @@ class ArticleRepository extends ServiceEntityRepository
             }
         }
         return $final;
+    }
+
+    /**
+     * @throws NonUniqueResultException
+     */
+    public function getPreviousArticle(int $id, string $lang): ?Article
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.id < :id')
+            ->setParameter(':id', $id)
+            ->andWhere('a.language = :lang')
+            ->setParameter(':lang', $lang)
+            ->orderBy('a.id', 'DESC')
+            ->setFirstResult(0)
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    /**
+     * @throws NonUniqueResultException
+     */
+    public function getNextArticle(int $id, string $lang): ?Article
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.id > :id')
+            ->setParameter(':id', $id)
+            ->andWhere('a.language = :lang')
+            ->setParameter(':lang', $lang)
+            ->orderBy('a.id', 'ASC')
+            ->setFirstResult(0)
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 }
