@@ -48,8 +48,6 @@
     <body>
         {{ include('_components/header.html.twig') }}
         <main data-controller="{{ set_stimulus(app.request.get('_route')) }}">
-            <pre>Page dumper:</pre>
-            {{ page is defined ? dump(page) : 'no page' }}
             {% block body %}{% endblock %}
         </main>
         {{ include('_components/footer.html.twig') }}

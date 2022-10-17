@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Builder\PageBuilder;
 use Doctrine\ORM\EntityManagerInterface;
+use ErrorException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,6 +20,9 @@ class LegalsController extends AbstractController
 {
     public function __construct(private EntityManagerInterface $entityManager){}
 
+    /**
+     * @throws ErrorException
+     */
     #[Route('/gdpr', name: 'gdpr')]
     public function gdpr(): Response
     {
@@ -32,6 +36,9 @@ class LegalsController extends AbstractController
         ]);
     }
 
+    /**
+     * @throws ErrorException
+     */
     #[Route('/terms-of-use', name: 'terms')]
     public function terms(): Response
     {
@@ -45,6 +52,9 @@ class LegalsController extends AbstractController
         ]);
     }
 
+    /**
+     * @throws ErrorException
+     */
     #[Route('/sitemap', name: 'plan')]
     public function plan(): Response
     {

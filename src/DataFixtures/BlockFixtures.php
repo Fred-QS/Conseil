@@ -25,8 +25,8 @@ class BlockFixtures extends Fixture
                 'sectionOrder' => 1,
                 'blockOrder' => 1,
                 'page' => 'home',
-                'contentFr' => 'uploads/page/home.jpg',
-                'contentEn' => 'uploads/page/home.jpg',
+                'contentFr' => 'images/page/home.jpg',
+                'contentEn' => 'images/page/home.jpg',
                 'module' => 'image'
             ],
         ];

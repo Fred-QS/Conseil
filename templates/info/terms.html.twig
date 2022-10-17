@@ -2,4 +2,9 @@
 
 {% block body %}
 
+    {% if page is defined %}
+        {% import '_macros/_builder.html.twig' as macro %}
+        {{ macro.builder(page) }}
+    {% endif %}
+
 {% endblock %}

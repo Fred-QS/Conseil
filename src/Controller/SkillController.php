@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Builder\PageBuilder;
 use Doctrine\ORM\EntityManagerInterface;
+use ErrorException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,6 +21,9 @@ class SkillController extends AbstractController
 {
     public function __construct(private EntityManagerInterface $entityManager){}
 
+    /**
+     * @throws ErrorException
+     */
     #[Route('/', name: '_index')]
     public function index(): Response
     {
@@ -32,6 +36,9 @@ class SkillController extends AbstractController
         ]);
     }
 
+    /**
+     * @throws ErrorException
+     */
     #[Route('/development', name: '_development')]
     public function development(): Response
     {
@@ -44,6 +51,9 @@ class SkillController extends AbstractController
         ]);
     }
 
+    /**
+     * @throws ErrorException
+     */
     #[Route('/iot', name: '_iot')]
     public function iot(): Response
     {
@@ -56,6 +66,9 @@ class SkillController extends AbstractController
         ]);
     }
 
+    /**
+     * @throws ErrorException
+     */
     #[Route('/consulting', name: '_consulting')]
     public function consulting(): Response
     {

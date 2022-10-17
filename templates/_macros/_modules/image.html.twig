@@ -1,0 +1,3 @@
+{% macro render(content) %}
+    <div class="image-container" style="background-image: url('{{ asset('build/' ~ content) }}')" title="{{ content|image_alt }}"></div>
+{% endmacro %}

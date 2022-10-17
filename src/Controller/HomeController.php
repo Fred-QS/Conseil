@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
+use ErrorException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -10,6 +11,9 @@ use App\Builder\PageBuilder;
 
 class HomeController extends AbstractController
 {
+    /**
+     * @throws ErrorException
+     */
     #[Route(path: '/', name: 'index')]
     #[Route(
         path: '/{_locale}',

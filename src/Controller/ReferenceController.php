@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Builder\PageBuilder;
 use Doctrine\ORM\EntityManagerInterface;
+use ErrorException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,6 +21,9 @@ class ReferenceController extends AbstractController
 {
     public function __construct(private EntityManagerInterface $entityManager){}
 
+    /**
+     * @throws ErrorException
+     */
     #[Route('/', name: '_index')]
     public function index(): Response
     {
@@ -33,6 +37,9 @@ class ReferenceController extends AbstractController
         ]);
     }
 
+    /**
+     * @throws ErrorException
+     */
     #[Route('/web', name: '_web')]
     public function web(): Response
     {
@@ -46,6 +53,9 @@ class ReferenceController extends AbstractController
         ]);
     }
 
+    /**
+     * @throws ErrorException
+     */
     #[Route('/mobile', name: '_mobile')]
     public function mobile(): Response
     {
@@ -59,6 +69,9 @@ class ReferenceController extends AbstractController
         ]);
     }
 
+    /**
+     * @throws ErrorException
+     */
     #[Route('/desktop', name: '_desktop')]
     public function desktop(): Response
     {
@@ -71,6 +84,9 @@ class ReferenceController extends AbstractController
         ]);
     }
 
+    /**
+     * @throws ErrorException
+     */
     #[Route('/training', name: '_training')]
     public function training(): Response
     {
