@@ -29,22 +29,53 @@ class SectionBuilder
                 }
             }
         } else {
-            throw new ErrorException('$ref parameter must have a value between 1 and 6.');
+            throw new ErrorException('$ref parameter must have a value between 1 and ' . count($this->templates) . '.');
         }
         return $this;
     }
 
+    /**
+     * @throws ErrorException
+     */
     public function setId(string $id): self
     {
+        if ($this->selected === null) {
+            throw new ErrorException('Section must be defined before being rendered.');
+        }
         $this->selected['id'] = $id;
         return $this;
     }
 
+    /**
+     * @throws ErrorException
+     */
     public function setClass(array $class): self
     {
+        if ($this->selected === null) {
+            throw new ErrorException('Section must be defined before being rendered.');
+        }
         $defined = $this->selected['class'];
+        $defined[] = $this->selected['title'] . '-section';
         $merged = array_merge($defined, $class);
         $this->selected['class'] = array_unique($merged);
+        return $this;
+    }
+
+    /**
+     * @throws ErrorException
+     */
+    public function setData(array $data): self
+    {
+        if ($this->selected === null) {
+            throw new ErrorException('Section must be defined before being rendered.');
+        }
+        foreach ($data as $key => $row) {
+            if (isset($this->selected['blocks'][$key])) {
+                $this->selected['blocks'][$key]['fr'] = $row['fr'];
+                $this->selected['blocks'][$key]['en'] = $row['en'];
+                $this->selected['blocks'][$key]['module'] = $row['module'];
+            }
+        }
         return $this;
     }
 
@@ -56,6 +87,10 @@ class SectionBuilder
         if ($this->selected === null) {
             throw new ErrorException('Section must be defined before being rendered.');
         }
-        return $this->selected;
+        return [
+            'id' => $this->selected['id'],
+            'class' => implode(' ', $this->selected['class']),
+            'blocks' => $this->selected['blocks']
+        ];
     }
 }
