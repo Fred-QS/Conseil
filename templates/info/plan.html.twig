@@ -3,7 +3,7 @@
 {% block body %}
 
     {% if page is defined %}
-        {% import '_macros/_builder.html.twig' as macro %}
+        {% import '_macros/_builder/_builder.html.twig' as macro %}
         {{ macro.builder(page) }}
     {% endif %}
 

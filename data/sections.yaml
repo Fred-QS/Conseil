@@ -8,7 +8,7 @@
   id: null
 
 -
-  title: "half-twice"
+  title: "one-and-two"
   ref: 2
   class:
     - sections
@@ -18,7 +18,7 @@
   id: null
 
 -
-  title: "one-to-two"
+  title: "two-and-one"
   ref: 3
   class:
     - sections
@@ -28,7 +28,7 @@
   id: null
 
 -
-  title: "two-to-one"
+  title: "tiles"
   ref: 4
   class:
     - sections
@@ -38,7 +38,7 @@
   id: null
 
 -
-  title: "all-three"
+  title: "two-split"
   ref: 5
   class:
     - sections
@@ -49,7 +49,7 @@
   id: null
 
 -
-  title: "all-four"
+  title: "three-split"
   ref: 6
   class:
     - sections

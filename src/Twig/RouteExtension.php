@@ -16,6 +16,8 @@ class RouteExtension extends AbstractExtension
             new TwigFunction('set_error_syntax', [$this, 'setErrorSyntax']),
             new TwigFunction('to_translation', [$this, 'toTranslation']),
             new TwigFunction('parse_translated_route', [$this, 'parseTranslatedRoute']),
+            new TwigFunction('set_article_main_class', [$this, 'setArticleMainClass']),
+            new TwigFunction('is_active', [$this, 'isActive']),
         ];
     }
 
@@ -56,5 +58,19 @@ class RouteExtension extends AbstractExtension
             $item = $explode[0];
         }
         return $item;
+    }
+
+    public function setArticleMainClass(string $route): string
+    {
+        return ($route === 'blog_article') ? ' class="alt"' : '';
+    }
+
+    public function isActive(string $route, string $ref, bool $global = false): string
+    {
+        if (true === $global) {
+            return str_starts_with($route, $ref) === true ? 'active' : '';
+        }
+
+        return $route === $ref ? 'active' : '';
     }
 }

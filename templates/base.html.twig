@@ -44,12 +44,32 @@
         <link rel="icon" href="{{ asset('build/images/favicon.png') }}">
         {% block stylesheets %}{{ encore_entry_link_tags('app') }}{% endblock %}
         {% block javascripts %}{{ encore_entry_script_tags('app') }}{% endblock %}
+        <noscript>
+            <link rel="stylesheet" href="{{ asset('build/noscript.css') }}" />
+        </noscript>
     </head>
-    <body>
-        {{ include('_components/header.html.twig') }}
-        <main data-controller="{{ set_stimulus(app.request.get('_route')) }}">
-            {% block body %}{% endblock %}
-        </main>
-        {{ include('_components/footer.html.twig') }}
+
+    <body class="is-preload">
+
+        <!-- Wrapper -->
+        <div id="wrapper">
+
+            {{ include('_components/header.html.twig') }}
+
+            <div id="main"{{ set_article_main_class(app.request.get('_route')) }} data-controller="{{ set_stimulus(app.request.get('_route')) }}">
+                {% block body %}{% endblock %}
+            </div>
+
+            {{ include('_components/footer.html.twig') }}
+
+        </div>
+
+        <script src="{{  asset('js/jquery.min.js') }}"></script>
+        <script src="{{  asset('js/jquery.scrolly.min.js') }}"></script>
+        <script src="{{  asset('js/jquery.scrollex.min.js') }}"></script>
+        <script src="{{  asset('js/browser.min.js') }}"></script>
+        <script src="{{  asset('js/breakpoints.min.js') }}"></script>
+        <script src="{{  asset('js/util.js') }}"></script>
+        <script src="{{  asset('js/main.js') }}"></script>
     </body>
 </html>

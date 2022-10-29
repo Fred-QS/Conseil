@@ -1,81 +1,95 @@
-<header>
-    <a href="{{ path('home', {_locale:app.request.getLocale()}) }}">
-        {{ 'site.name'|trans }}
+{% set locale = app.request.getLocale() %}
+{% set route = app.request.get('_route') %}
+<!-- Header -->
+<header id="header" class="alt">
+    <a href="{{ path('home', {_locale:locale}) }}" class="logo">
+        <strong>QS</strong> <span>{{ 'site.name'|trans|replace({'QS ':''}) }}</span>
     </a>
     <nav>
-        <ul>
-            <li>
-                <a href="{{ path('home', {_locale:app.request.getLocale()}) }}">{{ 'route.home'|trans }}</a>
-            </li>
-            <li class="dropdown">
-                <a href="{{ path('skill_index', {_locale:app.request.getLocale()}) }}">{{ 'route.skill'|trans }}</a>
-                <i class="fa-solid fa-caret-up"></i>
-                <ul>
-                    <li>
-                        <a href="{{ path('skill_development', {_locale:app.request.getLocale()}) }}">{{ 'route.development'|trans }}</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('skill_iot', {_locale:app.request.getLocale()}) }}">{{ 'route.iot'|trans }}</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('skill_consulting', {_locale:app.request.getLocale()}) }}">{{ 'route.consulting'|trans }}</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="dropdown">
-                <a href="{{ path('reference_index', {_locale:app.request.getLocale()}) }}">{{ 'route.reference'|trans }}</a>
-                <i class="fa-solid fa-caret-up"></i>
-                <ul><ul>
-                        <li>
-                            <a href="{{ path('reference_web', {_locale:app.request.getLocale()}) }}">{{ 'route.web'|trans }}</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('reference_mobile', {_locale:app.request.getLocale()}) }}">{{ 'route.mobile'|trans }}</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('reference_desktop', {_locale:app.request.getLocale()}) }}">{{ 'route.desktop'|trans }}</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('reference_training', {_locale:app.request.getLocale()}) }}">{{ 'route.training'|trans }}</a>
-                        </li>
-                    </ul>
-                </ul>
-            </li>
-            <li class="dropdown">
-                <a href="{{ path('service_index', {_locale:app.request.getLocale()}) }}">{{ 'route.service'|trans }}</a>
-                <i class="fa-solid fa-caret-up"></i>
-                <ul>
-                    <li>
-                        <a href="{{ path('service_application', {_locale:app.request.getLocale()}) }}">{{ 'route.application'|trans }}</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('service_consulting', {_locale:app.request.getLocale()}) }}">{{ 'route.consulting'|trans }}</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('service_iot', {_locale:app.request.getLocale()}) }}">{{ 'route.iot'|trans }}</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="{{ path('blog_index', {_locale:app.request.getLocale()}) }}">{{ 'route.blog'|trans }}</a>
-            </li>
-            <li>
-                <a href="{{ path('contact', {_locale:app.request.getLocale()}) }}">{{ 'route.contact'|trans }}</a>
-            </li>
-            <li class="dropdown">
-                <span>
-                    {{ app.request.getLocale()|upper }}
-                </span>
-                <i class="fa-solid fa-caret-up"></i>
-                <ul>
-                    <li>
-                        <a href="{{ path(parse_translated_route(app.request.get('_route')), {_locale: 'fr'}) }}">FR</a>
-                    </li>
-                    <li>
-                        <a href="{{ path(parse_translated_route(app.request.get('_route')), {_locale: 'en'}) }}">EN</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
+        <a href="#menu">Menu</a>
     </nav>
 </header>
+
+<!-- Menu -->
+<nav id="menu">
+    <ul class="links">
+        <li>
+            <a class="{{ is_active(route, 'home') }}" href="{{ path('home', {_locale:locale}) }}">{{ 'route.home'|trans }}</a>
+        </li>
+        <li class="dropdown">
+            <a class="{{ is_active(route, 'skill', true) }}" href="{{ path('skill_index', {_locale:locale}) }}">{{ 'route.skill'|trans }}&nbsp;<i class="fa-solid fa-caret-up"></i></a>
+            <ul class="links">
+                <li>
+                    <a class="{{ is_active(route, 'skill_development') }}" href="{{ path('skill_development', {_locale:locale}) }}">{{ 'route.development'|trans }}</a>
+                </li>
+                <li>
+                    <a class="{{ is_active(route, 'skill_iot') }}" href="{{ path('skill_iot', {_locale:locale}) }}">{{ 'route.iot'|trans }}</a>
+                </li>
+                <li>
+                    <a class="{{ is_active(route, 'skill_consulting') }}" href="{{ path('skill_consulting', {_locale:locale}) }}">{{ 'route.consulting'|trans }}</a>
+                </li>
+            </ul>
+        </li>
+        <li class="dropdown">
+            <a class="{{ is_active(route, 'reference', true) }}" href="{{ path('reference_index', {_locale:locale}) }}">{{ 'route.reference'|trans }}&nbsp;<i class="fa-solid fa-caret-up"></i></a>
+            <ul class="links">
+                <li>
+                    <a class="{{ is_active(route, 'reference_web') }}" href="{{ path('reference_web', {_locale:locale}) }}">{{ 'route.web'|trans }}</a>
+                </li>
+                <li>
+                    <a class="{{ is_active(route, 'reference_mobile') }}" href="{{ path('reference_mobile', {_locale:locale}) }}">{{ 'route.mobile'|trans }}</a>
+                </li>
+                <li>
+                    <a class="{{ is_active(route, 'reference_desktop') }}" href="{{ path('reference_desktop', {_locale:locale}) }}">{{ 'route.desktop'|trans }}</a>
+                </li>
+                <li>
+                    <a class="{{ is_active(route, 'reference_training') }}" href="{{ path('reference_training', {_locale:locale}) }}">{{ 'route.training'|trans }}</a>
+                </li>
+            </ul>
+        </li>
+        <li class="dropdown">
+            <a class="{{ is_active(route, 'service', true) }}" href="{{ path('service_index', {_locale:locale}) }}">{{ 'route.service'|trans }}&nbsp;<i class="fa-solid fa-caret-up"></i></a>
+            <ul class="links">
+                <li>
+                    <a class="{{ is_active(route, 'service_application') }}" href="{{ path('service_application', {_locale:locale}) }}">{{ 'route.application'|trans }}</a>
+                </li>
+                <li>
+                    <a class="{{ is_active(route, 'service_consulting') }}" href="{{ path('service_consulting', {_locale:locale}) }}">{{ 'route.consulting'|trans }}</a>
+                </li>
+                <li>
+                    <a class="{{ is_active(route, 'service_iot') }}" href="{{ path('service_iot', {_locale:locale}) }}">{{ 'route.iot'|trans }}</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="{{ path('blog_index', {_locale:locale}) }}">{{ 'route.blog'|trans }}</a>
+        </li>
+    </ul>
+    <ul class="actions stacked">
+        <li>
+            <a href="#contact" class="button primary fit">{{ 'route.contact'|trans }}</a>
+        </li>
+        <li>
+            {% if locale == 'fr' %}
+                <a class="button fit" href="{{ path(parse_translated_route(route), {_locale: 'en'}) }}">English version</a>
+            {% else %}
+                <a class="button fit" href="{{ path(parse_translated_route(route), {_locale: 'fr'}) }}">Version française</a>
+            {% endif %}
+        </li>
+    </ul>
+</nav>
+
+<!-- Banner -->
+<section id="banner" class="major">
+    <div class="inner">
+        <header class="major">
+            <h1>{{ 'title.hello'|trans }} !</h1>
+        </header>
+        <div class="content">
+            <p>{{ 'site.description'|trans|replace({'|':'<br>'})|raw }}</p>
+            <ul class="actions">
+                <li><a href="#" class="button next scrolly">{{ 'title.go'|trans }}</a></li>
+            </ul>
+        </div>
+    </div>
+</section>

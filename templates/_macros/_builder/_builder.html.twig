@@ -4,7 +4,7 @@
             {% for bloc in section.blocks %}
                 <div class="{{ bloc.class }}">
                     <div class="build-container {{ bloc.module }}-module">
-                        {% import '_macros/_modules/' ~ bloc.module ~ '.html.twig' as module %}
+                        {% import '_macros/_builder/_blocks/' ~ bloc.module ~ '.html.twig' as module %}
                         {{ module.render(bloc[app.request.getLocale()]) }}
                     </div>
                 </div>
