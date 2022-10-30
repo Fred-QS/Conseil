@@ -22,34 +22,27 @@ class ContactFormType extends AbstractType
             ->add('name', TextType::class, [
                 'label' => 'label.name',
                 'attr' => [
-                    'placeholder' => 'placeholder.name',
                     'class' => 'form-control'
                 ]
             ])
             ->add('email', EmailType::class, [
                 'label' => 'label.email',
                 'attr' => [
-                    'placeholder' => 'placeholder.email',
                     'class' => 'form-control'
                 ]
             ])
-            ->add('subject', ChoiceType::class, [
+            ->add('subject', TextType::class, [
                 'label' => 'label.subject',
-                'choices'  => [
-                    'contact.subject_first' => 'Subject 1',
-                    'contact.subject_second' => 'Subject 2',
-                    'contact.subject_third' => 'Subject 3',
-                ],
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'placeholder.subject',
                 ]
             ])
             ->add('content', TextareaType::class, [
                 'label' => 'label.message',
                 'attr' => [
-                    'placeholder' => 'placeholder.message',
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'rows' => 6,
+                    'style' => 'resize: none;'
                 ]
             ])
             ->add('recaptcha', EWZRecaptchaV3Type::class, array(
@@ -58,12 +51,6 @@ class ContactFormType extends AbstractType
                     new IsTrueV3()
                 )
             ))
-            ->add('submit', SubmitType::class, [
-                'label' => 'label.submit',
-                'attr' => [
-                    'class' => 'btn'
-                ]
-            ])
         ;
     }
 

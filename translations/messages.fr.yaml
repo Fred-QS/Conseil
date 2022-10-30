@@ -32,6 +32,7 @@ label:
   subject: Choisir le sujet de votre message
   message: Votre message
   submit: Envoyer
+  clear: Effacer
   page: Page
   of: sur
   on: sur

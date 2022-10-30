@@ -1,16 +1,68 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {% set notices = app.flashes('notice') %}
-    {% if notices is not empty %}
-        {% for message in notices %}
-            <div class="alert alert-info">
-                {{ message|trans }}
-            </div>
-        {% endfor %}
-    {% else %}
-        <div>
-            {{ form(form) }}
+    <!-- Contact -->
+    <section id="contact">
+        <div class="inner">
+            <section>
+                {% set notices = app.flashes('notice') %}
+                {% if notices is not empty %}
+                    {% for message in notices %}
+                        <div class="alert alert-info">
+                            {{ message|trans }}
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    {{ form_start(form) }}
+                        <div class="fields">
+                            <div class="field half">
+                                {{ form_row(form.name) }}
+                            </div>
+                            <div class="field half">
+                                {{ form_row(form.email) }}
+                            </div>
+                            <div class="field">
+                                {{ form_row(form.subject) }}
+                            </div>
+                            <div class="field">
+                                {{ form_row(form.content) }}
+                            </div>
+                        </div>
+                        {{ form_row(form.recaptcha) }}
+                        <ul class="actions">
+                            <li><input type="submit" value="{{ 'label.submit'|trans }}" class="primary" /></li>
+                            <li><input type="reset" value="{{ 'label.clear'|trans }}" /></li>
+                        </ul>
+                    {{ form_end(form) }}
+                {% endif %}
+            </section>
+            <section class="split">
+                <section>
+                    <div class="contact-method">
+                        <span class="icon solid alt fa-envelope"></span>
+                        <h3>Email</h3>
+                        <a href="#">information@untitled.tld</a>
+                    </div>
+                </section>
+                <section>
+                    <div class="contact-method">
+                        <span class="icon solid alt fa-phone"></span>
+                        <h3>Phone</h3>
+                        <span>(000) 000-0000 x12387</span>
+                    </div>
+                </section>
+                <section>
+                    <div class="contact-method">
+                        <span class="icon solid alt fa-home"></span>
+                        <h3>Address</h3>
+                        <span>
+                        1234 Somewhere Road #5432<br />
+                        Nashville, TN 00000<br />
+                        United States of America
+                    </span>
+                    </div>
+                </section>
+            </section>
         </div>
-    {% endif %}
+    </section>
 {% endblock %}
