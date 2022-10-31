@@ -25,9 +25,9 @@ class ReferenceController extends AbstractController
      * @throws ErrorException
      */
     #[Route('/', name: '_index')]
-    public function index(): Response
+    public function index(Request $request): Response
     {
-        $page = (new PageBuilder($this->entityManager))->buildPage('reference');
+        $page = (new PageBuilder($this->entityManager))->buildPage('reference', $request->getLocale());
         return $this->render('reference/index.html.twig', [
             'description' => 'page.reference.description',
             'keywords' => 'page.reference.keywords',
@@ -41,9 +41,9 @@ class ReferenceController extends AbstractController
      * @throws ErrorException
      */
     #[Route('/web', name: '_web')]
-    public function web(): Response
+    public function web(Request $request): Response
     {
-        $page = (new PageBuilder($this->entityManager))->buildPage('web');
+        $page = (new PageBuilder($this->entityManager))->buildPage('web', $request->getLocale());
         return $this->render('reference/web.html.twig', [
             'description' => 'page.web.description',
             'keywords' => 'page.web.keywords',
@@ -57,9 +57,9 @@ class ReferenceController extends AbstractController
      * @throws ErrorException
      */
     #[Route('/mobile', name: '_mobile')]
-    public function mobile(): Response
+    public function mobile(Request $request): Response
     {
-        $page = (new PageBuilder($this->entityManager))->buildPage('mobile');
+        $page = (new PageBuilder($this->entityManager))->buildPage('mobile', $request->getLocale());
         return $this->render('reference/mobile.html.twig', [
             'description' => 'page.mobile.description',
             'keywords' => 'page.mobile.keywords',
@@ -73,9 +73,9 @@ class ReferenceController extends AbstractController
      * @throws ErrorException
      */
     #[Route('/desktop', name: '_desktop')]
-    public function desktop(): Response
+    public function desktop(Request $request): Response
     {
-        $page = (new PageBuilder($this->entityManager))->buildPage('desktop');
+        $page = (new PageBuilder($this->entityManager))->buildPage('desktop', $request->getLocale());
         return $this->render('reference/desktop.html.twig', [
             'description' => 'page.desktop.description',
             'keywords' => 'page.desktop.keywords',
@@ -88,9 +88,9 @@ class ReferenceController extends AbstractController
      * @throws ErrorException
      */
     #[Route('/training', name: '_training')]
-    public function training(): Response
+    public function training(Request $request): Response
     {
-        $page = (new PageBuilder($this->entityManager))->buildPage('training');
+        $page = (new PageBuilder($this->entityManager))->buildPage('training', $request->getLocale());
         return $this->render('reference/training.html.twig', [
             'description' => 'page.training.description',
             'keywords' => 'page.training.keywords',

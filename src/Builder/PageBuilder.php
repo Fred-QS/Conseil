@@ -9,9 +9,6 @@ use ErrorException;
 
 class PageBuilder
 {
-    private array $sections;
-    private array $blocks;
-
     public function __construct(
         private EntityManagerInterface $entityManager
     ) {}
@@ -19,22 +16,20 @@ class PageBuilder
     /**
      * @throws ErrorException
      */
-    public function buildPage(string $page): array
+    public function buildPage(string $page, string $locale): array
     {
-        $blocks = $this->entityManager->getRepository(Block::class)->getPageBlocks($page);
+        $blocks = $this->entityManager->getRepository(Block::class)->getPageBlocks($page, $locale);
         $sections = $this->orderBySections($blocks);
         $render = [];
 
         foreach ($sections as $index => $s) {
             $section = new SectionBuilder();
-            $section->setSection($s[0]['data']['section']);
+            $section->setSection($s['ref']);
             $section->setId($page . '-page-section-' . ($index + 1));
-            $section->setClass([$page . '-page-section']);
             $data = [];
-            foreach ($s as $item) {
+            foreach ($s['blocks'] as $item) {
                 $data[] = [
-                    'fr' => $item['data']['content']['fr'],
-                    'en' => $item['data']['content']['en'],
+                    'content' => $item['data']['content'],
                     'module' => $item['data']['module'],
                 ];
             }
@@ -50,35 +45,19 @@ class PageBuilder
         $sections = [];
         /**@var Block[] $blocks*/
         foreach ($blocks as $block) {
-            $index = $block->getSectionOrder() - 1;
+            $index = $block['sectionOrder'] - 1;
             if (!isset($sections[$index])) {
                 $sections[$index] = [];
             }
-            $sections[$index][] = [
-                'order' => $block->getBlockOrder(),
+            $sections[$index]['name'] = '';
+            $sections[$index]['ref'] = $block['section'];
+            $sections[$index]['blocks'][] = [
+                'order' => $block['blockOrder'],
                 'data' => [
-                    'section' => $block->getSection(),
-                    'content' => [
-                        'fr' => $block->getContentFr(),
-                        'en' => $block->getContentEn()
-                    ],
-                    'module' => $block->getModule()
+                    'module' => $block['module'],
+                    'content' => $block['content']
                 ]
             ];
-        }
-        return $this->orderByBlocks($sections);
-    }
-
-    private function orderByBlocks(array $sections): array
-    {
-        foreach ($sections as $index => $block) {
-
-            $blocks = [];
-            foreach ($block as $key => $row) {
-                $blocks[$key] = $row['order'];
-            }
-            array_multisort($blocks, SORT_ASC, $block);
-            $sections[$index] = $block;
         }
         return $sections;
     }

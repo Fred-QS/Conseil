@@ -18,7 +18,10 @@
 			width: -webkit-max-content;
 			width: -ms-max-content;
 			width: max-content;
+			max-width: 100%;
 			margin-bottom: _size(element-margin);
+			display: flex;
+			flex-direction: column;
 
 			> :first-child {
 				margin-bottom: 0;

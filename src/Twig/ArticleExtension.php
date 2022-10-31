@@ -21,7 +21,7 @@ class ArticleExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('display_categories', [$this, 'displayCategories']),
+            new TwigFunction('display_categories', [$this, 'displayCategories'])
         ];
     }
 

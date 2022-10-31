@@ -25,9 +25,9 @@ class SkillController extends AbstractController
      * @throws ErrorException
      */
     #[Route('/', name: '_index')]
-    public function index(): Response
+    public function index(Request $request): Response
     {
-        $page = (new PageBuilder($this->entityManager))->buildPage('skill');
+        $page = (new PageBuilder($this->entityManager))->buildPage('skill', $request->getLocale());
         return $this->render('skill/index.html.twig', [
             'description' => 'page.skill.description',
             'keywords' => 'page.skill.keywords',
@@ -40,9 +40,9 @@ class SkillController extends AbstractController
      * @throws ErrorException
      */
     #[Route('/development', name: '_development')]
-    public function development(): Response
+    public function development(Request $request): Response
     {
-        $page = (new PageBuilder($this->entityManager))->buildPage('development');
+        $page = (new PageBuilder($this->entityManager))->buildPage('development', $request->getLocale());
         return $this->render('skill/development.html.twig', [
             'description' => 'page.development.description',
             'keywords' => 'page.development.keywords',
@@ -55,9 +55,9 @@ class SkillController extends AbstractController
      * @throws ErrorException
      */
     #[Route('/iot', name: '_iot')]
-    public function iot(): Response
+    public function iot(Request $request): Response
     {
-        $page = (new PageBuilder($this->entityManager))->buildPage('skill_iot');
+        $page = (new PageBuilder($this->entityManager))->buildPage('skill_iot', $request->getLocale());
         return $this->render('skill/iot.html.twig', [
             'description' => 'page.skill_iot.description',
             'keywords' => 'page.skill_iot.keywords',
@@ -70,9 +70,9 @@ class SkillController extends AbstractController
      * @throws ErrorException
      */
     #[Route('/consulting', name: '_consulting')]
-    public function consulting(): Response
+    public function consulting(Request $request): Response
     {
-        $page = (new PageBuilder($this->entityManager))->buildPage('skill_consulting');
+        $page = (new PageBuilder($this->entityManager))->buildPage('skill_consulting', $request->getLocale());
         return $this->render('skill/consulting.html.twig', [
             'description' => 'page.skill_consulting.description',
             'keywords' => 'page.skill_consulting.keywords',

@@ -1,13 +1,10 @@
 {% macro builder(page) %}
+    {{ dump(page) }}
     {% for section in page %}
-        <section id="{{ section.id }}" class="{{ section.class }}">
+        <section id="{{ section.id }}">
             {% for bloc in section.blocks %}
-                <div class="{{ bloc.class }}">
-                    <div class="build-container {{ bloc.module }}-module">
-                        {% import '_macros/_builder/_blocks/' ~ bloc.module ~ '.html.twig' as module %}
-                        {{ module.render(bloc[app.request.getLocale()]) }}
-                    </div>
-                </div>
+                {% import '_macros/_builder/_blocks/' ~ bloc.module ~ '.html.twig' as module %}
+                {{ module.render(bloc.content) }}
             {% endfor %}
         </section>
     {% endfor %}

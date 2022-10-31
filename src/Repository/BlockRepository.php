@@ -42,9 +42,10 @@ class BlockRepository extends ServiceEntityRepository
     /**
      * @return Block[] Returns an array of Block objects
      */
-    public function getPageBlocks(string $page): array
+    public function getPageBlocks(string $page, string $locale): array
     {
         return $this->createQueryBuilder('b')
+            ->select('b.id', 'b.section', 'b.sectionOrder', 'b.page', 'b.blockOrder', 'b.module', 'b.content' . \ucfirst($locale . ' as content'))
             ->andWhere('b.page = :page')
             ->setParameter('page', $page)
             ->orderBy('b.sectionOrder', 'ASC')

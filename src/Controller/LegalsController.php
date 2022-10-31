@@ -6,6 +6,7 @@ use App\Builder\PageBuilder;
 use Doctrine\ORM\EntityManagerInterface;
 use ErrorException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -24,9 +25,9 @@ class LegalsController extends AbstractController
      * @throws ErrorException
      */
     #[Route('/gdpr', name: 'gdpr')]
-    public function gdpr(): Response
+    public function gdpr(Request $request): Response
     {
-        $page = (new PageBuilder($this->entityManager))->buildPage('info_gdpr');
+        $page = (new PageBuilder($this->entityManager))->buildPage('info_gdpr', $request->getLocale());
         return $this->render('info/gdpr.html.twig', [
             'description' => 'page.info_gdpr.description',
             'keywords' => 'page.info_gdpr.keywords',
@@ -40,9 +41,9 @@ class LegalsController extends AbstractController
      * @throws ErrorException
      */
     #[Route('/terms-of-use', name: 'terms')]
-    public function terms(): Response
+    public function terms(Request $request): Response
     {
-        $page = (new PageBuilder($this->entityManager))->buildPage('info_terms');
+        $page = (new PageBuilder($this->entityManager))->buildPage('info_terms', $request->getLocale());
         return $this->render('info/terms.html.twig', [
             'description' => 'page.info_terms.description',
             'keywords' => 'page.info_terms.keywords',
@@ -56,9 +57,9 @@ class LegalsController extends AbstractController
      * @throws ErrorException
      */
     #[Route('/sitemap', name: 'plan')]
-    public function plan(): Response
+    public function plan(Request $request): Response
     {
-        $page = (new PageBuilder($this->entityManager))->buildPage('info_plan');
+        $page = (new PageBuilder($this->entityManager))->buildPage('info_plan', $request->getLocale());
         return $this->render('info/plan.html.twig', [
             'description' => 'page.info_plan.description',
             'keywords' => 'page.info_plan.keywords',

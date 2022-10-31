@@ -38,6 +38,11 @@
 				&.quarter {
 					width: calc(25% - #{$gutter * 0.25});
 				}
+
+				&.search-button {
+					display: flex;
+					align-items: flex-end;
+				}
 			}
 		}
 

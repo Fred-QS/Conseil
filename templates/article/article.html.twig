@@ -1,55 +1,47 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h2>{{ article.title }}</h2>
-    <small>
-        {{ 'label.published'|trans }} {{ app.request.getLocale() == 'fr' ? article.pubDate|date("d/m/Y") : article.pubDate|date("Y/m/d") }} {{ 'label.on'|trans }} {{ article.source|upper }}
-    </small>
-    {% set categories = display_categories(article.category) %}
-    <small>{{ categories.label|trans }}: {{ categories.data }}</small>
-    <br>
-    <img style="width: 100%;" src="{{ article.imageUrl }}" alt="{{ article.title }}">
-    <br>
-    {% set split = article.content|split_content %}
-    <p>{{ split[0]|raw }}</p>
-    <br>
-    <p>{{ split[1]|raw }}</p>
-    <br>
-    <small>
-        {% if article.creator is defined and article.creator is not same as '' %}
-            {{ 'label.author'|trans }}: {{ article.creator }}
-        {% else %}
-            Source: {{ article.source|upper }}
-        {% endif %}
-    </small>
-    <div class="rs-article-container">
-        <a href="https://www.facebook.com/sharer/sharer.php?kid_directed_site=0&sdk=joey&u={{ app.request.uri }}&display=popup&ref=plugin&src=share_button" target="_blank" class="article-rs-icons">
-            <i class="fa-brands fa-square-facebook fa-2xl"></i>
-        </a>
-        <a href="https://linkedin.com/shareArticle?url={{ app.request.uri }}" target="_blank" class="article-rs-icons">
-            <i class="fa-brands fa-linkedin fa-2xl"></i>
-        </a>
-        <a href="https://twitter.com/intent/tweet?url={{ app.request.uri }}" target="_blank" class="article-rs-icons">
-            <i class="fa-brands fa-twitter-square fa-2xl"></i>
-        </a>
-    </div>
-    <div class="other-articles">
-        {% if previous is not null %}
-            <a class="btn" href="{{ path('blog_article', {_locale:app.request.getLocale(),uri: previous.uri }) }}" title="{{ previous.title }}">{{ 'label.previous_article'|trans }}</a>
-        {% endif %}
-        {% if next is not null %}
-            <a class="btn" href="{{ path('blog_article', {_locale:app.request.getLocale(),uri: next.uri }) }}" title="{{ next.title }}">{{ 'label.next_article'|trans }}</a>
-        {% endif %}
-    </div>
-    {# <section id="one">
+    <section>
         <div class="inner">
             <header class="major">
-                <h1>Generic</h1>
+                <h1>{{ article.title }}</h1>
+                <small class="article-source-header">
+                    {{ 'label.published'|trans }} {{ app.request.getLocale() == 'fr' ? article.pubDate|date("d/m/Y") : article.pubDate|date("Y/m/d") }} {{ 'label.on'|trans }} {{ article.source|upper }}
+                </small>
+                {% set categories = display_categories(article.category) %}
+                <small class="article-source-header">{{ categories.label|trans }}: {{ categories.data }}</small>
             </header>
-            <span class="image main"><img src="images/pic11.jpg" alt="" /></span>
-            <p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fergiat. Pellentesque in mi eu massa lacinia malesuada et a elit. Donec urna ex, lacinia in purus ac, pretium pulvinar mauris. Curabitur sapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus rutrum facilisis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam tristique libero eu nibh porttitor fermentum. Nullam venenatis erat id vehicula viverra. Nunc ultrices eros ut ultricies condimentum. Mauris risus lacus, blandit sit amet venenatis non, bibendum vitae dolor. Nunc lorem mauris, fringilla in aliquam at, euismod in lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In non lorem sit amet elit placerat maximus. Pellentesque aliquam maximus risus, vel sed vehicula.</p>
-            <p>Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fersapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit tristique lorem ipsum dolor.</p>
+            <span class="image main"><img style="width: 100%;" src="{{ article.imageUrl }}" alt="{{ article.title }}"></span>
+            {% set split = article.content|split_content %}
+            <p>{{ split[0]|raw }}</p>
+            <br>
+            <p>{{ split[1]|raw }}</p>
+            <small class="article-source">
+                {% if article.creator is defined and article.creator is not same as '' %}
+                    {{ 'label.author'|trans }}: {{ article.creator }}
+                {% else %}
+                    Source: {{ article.source|upper }}
+                {% endif %}
+            </small>
+            <div class="article-rs-icons">
+                <a href="https://www.facebook.com/sharer/sharer.php?kid_directed_site=0&sdk=joey&u={{ app.request.uri }}&display=popup&ref=plugin&src=share_button" target="_blank" class="article-rs-icons">
+                    <i class="fa-brands fa-square-facebook fa-2xl"></i>
+                </a>
+                <a href="https://linkedin.com/shareArticle?url={{ app.request.uri }}" target="_blank" class="article-rs-icons">
+                    <i class="fa-brands fa-linkedin fa-2xl"></i>
+                </a>
+                <a href="https://twitter.com/intent/tweet?url={{ app.request.uri }}" target="_blank" class="article-rs-icons">
+                    <i class="fa-brands fa-twitter-square fa-2xl"></i>
+                </a>
+            </div>
+            <div class="other-articles">
+                {% if previous is not null %}
+                    <a class="button small" href="{{ path('blog_article', {_locale:app.request.getLocale(),uri: previous.uri }) }}" title="{{ previous.title }}">{{ 'label.previous_article'|trans }}</a>
+                {% endif %}
+                {% if next is not null %}
+                    <a class="button small" href="{{ path('blog_article', {_locale:app.request.getLocale(),uri: next.uri }) }}" title="{{ next.title }}">{{ 'label.next_article'|trans }}</a>
+                {% endif %}
+            </div>
         </div>
-    </section> #}
+    </section>
 {% endblock %}

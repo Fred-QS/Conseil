@@ -2,43 +2,58 @@
 
 {% block body %}
     {% if articles is defined %}
-        <form method="get">
-            <label>
-                <span>{{ 'label.search.query'|trans }}</span>
-                <input type="text" name="qry" value="{% if qry is not null %}{{ qry }}{% endif %}">
-            </label>
-            <label>
-                <span>{{ 'label.search.order'|trans }}</span>
-                <select name="order">
-                    <option {% if order|lower is same as 'desc' %}selected{% endif %} value="desc">{{ 'label.search.desc'|trans }}</option>
-                    <option {% if order|lower is same as 'asc' %}selected{% endif %} value="asc">{{ 'label.search.asc'|trans }}</option>
-                </select>
-            </label>
-            <label>
-                <span>{{ 'label.search.category'|trans }}</span>
-                <select name="category">
-                    <option {% if category|lower is same as 'all' %}selected{% endif %} value="all">{{ 'label.search.all'|trans }}</option>
-                    {% for cat in categories %}
-                        <option {% if category|lower is same as cat %}selected{% endif %} value="{{ cat }}">{{ ('label.search.' ~ cat)|trans }}</option>
-                    {% endfor %}
-                </select>
-            </label>
-            <button type="submit">{{ 'label.search.submit'|trans }}</button>
-        </form>
-        {% import '_macros/pagination.html.twig' as macro %}
-        <p>{{ totalItems > 1 ? totalItems ~ ' articles' : totalItems ~ ' article' }}</p>
-        {% if total > 1 %}
-            <p>{{ 'label.page'|trans }} {{ page }} {{ 'label.of'|trans }} {{ total }}</p>
-        {% endif %}
-        <div class="articles-container">
+        <section>
+            <div class="inner">
+                <form method="get">
+                    <div class="fields">
+                        <div class="field quarter">
+                            <label>{{ 'label.search.query'|trans }}</label>
+                            <input type="text" name="qry" value="{% if qry is not null %}{{ qry }}{% endif %}">
+                        </div>
+                        <div class="field quarter">
+                            <label>{{ 'label.search.order'|trans }}</label>
+                            <select name="order">
+                                <option {% if order|lower is same as 'desc' %}selected{% endif %} value="desc">{{ 'label.search.desc'|trans }}</option>
+                                <option {% if order|lower is same as 'asc' %}selected{% endif %} value="asc">{{ 'label.search.asc'|trans }}</option>
+                            </select>
+                        </div>
+                        <div class="field quarter">
+                            <label>{{ 'label.search.category'|trans }}</label>
+                            <select name="category">
+                                <option {% if category|lower is same as 'all' %}selected{% endif %} value="all">{{ 'label.search.all'|trans }}</option>
+                                {% for cat in categories %}
+                                    <option {% if category|lower is same as cat %}selected{% endif %} value="{{ cat }}">{{ ('label.search.' ~ cat)|trans }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="field quarter search-button">
+                            <button class="button fit" type="submit">{{ 'label.search.submit'|trans }}</button>
+                        </div>
+                    </div>
+                </form>
+                {% import '_macros/pagination.html.twig' as macro %}
+                <div class="articles-header">
+                    <p class="counter">{{ (totalItems > 1 ? '<strong>' ~ totalItems ~ '</strong><span>articles</span>' : '<strong>' ~ totalItems ~ '</strong><span>article</span>')|raw }}</p>
+                    {% if total > 1 %}
+                        <i class="fa-solid fa-circle fa-2xs"></i>
+                        <p>{{ 'label.page'|trans }} <strong>{{ page }}</strong> {{ 'label.of'|trans }} <span>{{ total }}</span></p>
+                    {% endif %}
+                </div>
+            </div>
+        </section>
+        <section class="tiles">
+            {% import '_macros/_builder/_sections/tiles.html.twig' as tiles %}
+            {% set rebuild = [] %}
             {% for article in articles %}
-                <a href="{{ path('blog_article', {_locale:app.request.getLocale(),uri: article.uri }) }}" class="article-preview">
-                    <h3>{{ article.title }}</h3>
-                    <div class="article-image-preview" style="background-image: url('{{ article.imageUrl }}')"></div>
-                </a>
+                {% set rebuild = rebuild|merge([{
+                    'title': article.title,
+                    'image': article.imageUrl,
+                    'url': path('blog_article', {_locale:app.request.getLocale(),uri: article.uri })
+                }]) %}
             {% endfor %}
-        </div>
-        {% set url = path(app.request.get('_route'), {_locale: app.request.getLocale()}) %}
-        {{ macro.pagination(total, current, url, category, order, qry) }}
+            {{ tiles.blocks(rebuild) }}
+            {% set url = path(app.request.get('_route'), {_locale: app.request.getLocale()}) %}
+            {{ macro.pagination(total, current, url, category, order, qry) }}
+        </section>
     {% endif %}
 {% endblock %}
