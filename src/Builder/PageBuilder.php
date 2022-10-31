@@ -31,6 +31,7 @@ class PageBuilder
                 $data[] = [
                     'content' => $item['data']['content'],
                     'module' => $item['data']['module'],
+                    'order' => $item['data']['order'],
                 ];
             }
             $section->setData($data);
@@ -52,10 +53,10 @@ class PageBuilder
             $sections[$index]['name'] = '';
             $sections[$index]['ref'] = $block['section'];
             $sections[$index]['blocks'][] = [
-                'order' => $block['blockOrder'],
                 'data' => [
                     'module' => $block['module'],
-                    'content' => $block['content']
+                    'content' => $block['content'],
+                    'order' => $block['blockOrder'],
                 ]
             ];
         }

@@ -58,6 +58,7 @@ class SectionBuilder
             if (isset($this->selected['blocks'][$key])) {
                 $this->selected['blocks'][$key]['module'] = $row['module'];
                 $this->selected['blocks'][$key]['content'] = $row['content'];
+                $this->selected['blocks'][$key]['order'] = $row['order'];
             }
         }
         return $this;

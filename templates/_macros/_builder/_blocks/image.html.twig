@@ -1,3 +1,5 @@
-{% macro render(content) %}
-    <div class="image-container" style="background-image: url('{{ asset('build/' ~ content) }}')" title="{{ content|image_alt }}"></div>
+{% macro render(content, position = 'center center') %}
+    <span class="image">
+        <img src="{{ asset('build/' ~ content) }}" alt="{{ content|image_alt }}" data-position="{{ position }}">
+    </span>
 {% endmacro %}

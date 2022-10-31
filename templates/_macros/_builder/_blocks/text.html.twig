@@ -1,3 +1,7 @@
 {% macro render(content) %}
-    {{ content|raw }}
+    <div class="content">
+        <div class="inner">
+            {{ content|filtered_text|raw }}
+        </div>
+    </div>
 {% endmacro %}
