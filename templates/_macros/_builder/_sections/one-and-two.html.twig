@@ -1,5 +1,5 @@
-<section class="spotlights">
-    <section>
+{% macro render(section) %}
+    <section id="{{ section.id }}">
         <a href="generic.html" class="image">
             <img src="images/pic08.jpg" alt="" data-position="center center">
         </a>
@@ -15,4 +15,4 @@
             </div>
         </div>
     </section>
-</section>
+{% endmacro %}

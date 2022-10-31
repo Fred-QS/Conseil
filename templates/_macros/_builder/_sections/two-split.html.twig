@@ -1,5 +1,5 @@
-<section class="spotlights">
-    <div class="inner">
+{% macro render(section) %}
+    <div class="inner" id="{{ section.id }}">
         <div class="row">
             <div class="col-6 col-12-small">
                 <h3>Sem turpis amet semper</h3>
@@ -11,4 +11,4 @@
             </div>
         </div>
     </div>
-</section>
+{% endmacro %}

@@ -2,8 +2,8 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Block;
 use App\Entity\Newsletter;
-use App\Entity\Page;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -27,7 +27,7 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToCrud('Pages', 'fas fa-pager', Page::class);
+        yield MenuItem::linkToCrud('Pages', 'fas fa-pager', Block::class);
         yield MenuItem::linkToCrud('Abonnés', 'fas fa-envelope', Newsletter::class);
         yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-user', User::class);
     }

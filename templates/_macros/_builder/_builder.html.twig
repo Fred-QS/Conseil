@@ -1,11 +1,9 @@
 {% macro builder(page) %}
-    {{ dump(page) }}
-    {% for section in page %}
-        <section id="{{ section.id }}">
-            {% for bloc in section.blocks %}
-                {% import '_macros/_builder/_blocks/' ~ bloc.module ~ '.html.twig' as module %}
-                {{ module.render(bloc.content) }}
-            {% endfor %}
-        </section>
-    {% endfor %}
+    <section class="spotlights">
+        {% for section in page %}
+            {{ dump(section.blocks) }}
+            {% import '_macros/_builder/_sections/' ~ section.title as section %}
+            {{ section.render(section) }}
+        {% endfor %}
+    </section>
 {% endmacro %}
