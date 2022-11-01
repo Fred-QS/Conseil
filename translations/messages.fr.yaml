@@ -153,3 +153,9 @@ admin:
   pages: Pages
   dashboard: Tableau de bord
   activity: Activité
+  page: Page
+  edit: Éditer
+  delete: Supprimer
+  image: Image
+  sections_count: Nbr de sections
+  create_page: "Vous devez créer une page dans <b>data/backgrounds.yaml</b> en ajoutant une <b>clé: valeur</b> ou la clé est le <b>nom de la route</b> de votre page et la <b>valeur</b> le nom de <b>l'image du header</b> du template."

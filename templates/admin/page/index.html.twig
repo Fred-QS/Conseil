@@ -3,13 +3,10 @@
 {% block content %}
 
     <div class="deport-search" style="display: none;">
-
         <form class="form-action-search" method="get">
-
             <input type="hidden" name="routeName" value="admin_page">
             <input type="hidden" name="menuIndex" value="0">
             <input type="hidden" name="submenuIndex" value="-1">
-
             <div class="form-group">
                 <div class="form-widget">
                     <i class="fas fa-search content-search-icon"></i>
@@ -21,7 +18,6 @@
                 </div>
             </div>
         </form>
-
         <script>
             var form = document.querySelector('.deport-search'),
                 to = document.querySelector('aside .content-search');
@@ -40,14 +36,91 @@
                 </h1>
             </div>
         </section>
-
+        {% if pages is empty %}
+            <section>
+                <div>
+                    <p>{{ 'admin.create_page'|trans|raw }}</p>
+                </div>
+            </section>
+        {% endif %}
         <section id="main" class="content-body">
-
             <div class="content-panel-footer without-padding without-border">
+                <table class="table datagrid {{ pages is empty ? 'datagrid-empty' }}">
+                    {% if pages is not empty %}
+                        <thead>
+                            <tr>
+                                <th>
+                                    <i class="fa fa-fw fa-pager fa-lg"></i>
+                                </th>
+                                <th dir="ltr">
+                                    <a>ID<i class="fa fa-fw fa-sort"></i></a>
+                                </th>
+                                <th dir="ltr">
+                                    <a>{{ 'admin.page'|trans }}<i class="fa fa-fw fa-sort"></i></a>
+                                </th>
+                                <th dir="ltr">
+                                    <a>{{ 'admin.image'|trans }}</a>
+                                </th>
+                                <th dir="ltr">
+                                    <a>{{ 'admin.sections_count'|trans }}</a>
+                                </th>
+                                <th style="width: 10px" dir="ltr">
+                                    <span class="sr-only">Actions</span>
+                                </th>
+                            </tr>
+                        </thead>
+                    {% endif %}
+                    <tbody>
+                        {% if pages is empty %}
+                            {% for i in 1..14 %}
+                                <tr class="empty-row">
+                                    <td><span></span></td>
+                                    <td><span></span></td>
+                                    <td><span></span></td>
+                                    <td><span></span></td>
+                                    <td><span></span></td>
+                                    <td><span></span></td>
+                                </tr>
+                                {% if 3 == loop.index %}
+                                    <tr class="no-results">
+                                        <td colspan="100">
+                                            {{ t('datagrid.no_results', ea.i18n.translationParameters, 'EasyAdminBundle')|trans }}
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            {% for page in pages %}
+                                <tr>
+                                    <td><i class="fa fa-fw fa-regular fa-circle fa-xs"></i></td>
+                                    <td>{{ loop.index + 1 }}</td>
+                                    <td style="text-transform: capitalize;">{{ page.title|replace({'_':' '}) }}</td>
+                                    <td><img src="{{ asset('build/images/page/' ~ page.background) }}" alt="{{ page.title }}" height="40"></td>
+                                    <td>{{ page.sections|length }}</td>
+                                    <td class="actions actions-as-dropdown">
+                                        <div class="dropdown dropdown-actions">
+                                            <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                {# don't use FontAwesome 'fa-ellipsis-h' icon here because it doesn't look good #}
+                                                {# this icon is 'dots-horizontal' icon from https://heroicons.com/ #}
+                                                <svg xmlns="http://www.w3.org/2000/svg" height="21" width="21" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
+                                                </svg>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item action-edit" href="" data-action-name="edit"><span class="action-label">{{ 'admin.edit'|trans }}</span></a>
 
+                                                <a class="dropdown-item action-delete text-danger" href="" data-action-name="delete" formaction="" data-bs-toggle="modal" data-bs-target="#modal-delete"><span class="action-label">{{ 'admin.delete'|trans }}</span></a>
+
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% endif %}
+                    </tbody>
+                </table>
             </div>
-
         </section>
-
     </article>
+
 {% endblock %}
