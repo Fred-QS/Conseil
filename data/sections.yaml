@@ -37,3 +37,10 @@
     - {content: null, module: null}
     - {content: null, module: null}
   id: null
+
+-
+  title: "banner"
+  ref: 6
+  blocks:
+    - {content: null, module: null}
+  id: null

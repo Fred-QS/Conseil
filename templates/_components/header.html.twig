@@ -67,7 +67,7 @@
     </ul>
     <ul class="actions stacked">
         <li>
-            <a href="#contact" class="button primary fit">{{ 'route.contact'|trans }}</a>
+            <a href="{{ path('contact', {_locale:locale}) }}" class="button primary fit">{{ 'route.contact'|trans }}</a>
         </li>
         <li>
             {% if locale == 'fr' %}
@@ -82,8 +82,22 @@
 <!-- Banner -->
 <section id="banner" class="major">
     <div class="inner">
+        <span class="image" style="display: none;">
+            <img src="{{ asset('build/images/page/' ~ provide_bg(app.request.get('_route'))) }}" alt="">
+        </span>
         <header class="major">
-            <h1>{{ 'title.hello'|trans }} !</h1>
+            <h1>
+                {% if article is defined %}
+                    {{ article.title }}
+                {% else %}
+                    {% set route = app.request.get('_route') %}
+                    {% if route != 'home' and route != 'index' %}
+                        {{ ('route.'~splitter(route))|trans }}
+                    {% else %}
+                        {{ 'title.hello'|trans }}
+                    {% endif %}
+                {% endif %}
+            </h1>
         </header>
         <div class="content">
             <p>{{ 'site.description'|trans|replace({'|':'<br>'})|raw }}</p>

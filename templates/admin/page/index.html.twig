@@ -1,0 +1,53 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block content %}
+
+    <div class="deport-search" style="display: none;">
+
+        <form class="form-action-search" method="get">
+
+            <input type="hidden" name="routeName" value="admin_page">
+            <input type="hidden" name="menuIndex" value="0">
+            <input type="hidden" name="submenuIndex" value="-1">
+
+            <div class="form-group">
+                <div class="form-widget">
+                    <i class="fas fa-search content-search-icon"></i>
+
+                    <label class="content-search-label" data-value="">
+                        <input class="form-control is-blank" type="search" name="query" value="" placeholder="{{ 'label.search.submit'|trans }}" spellcheck="false" autocorrect="off" oninput="this.parentNode.dataset.value=this.value">
+                    </label>
+
+                </div>
+            </div>
+        </form>
+
+        <script>
+            var form = document.querySelector('.deport-search'),
+                to = document.querySelector('aside .content-search');
+            to.innerHTML = form.innerHTML;
+            var script = to.querySelector('script');
+            to.removeChild(script);
+            form.parentElement.removeChild(form);
+        </script>
+    </div>
+
+    <article class="content">
+        <section class="content-header">
+            <div class="content-header-title">
+                <h1 class="title">
+                    {{ 'admin.pages'|trans }}
+                </h1>
+            </div>
+        </section>
+
+        <section id="main" class="content-body">
+
+            <div class="content-panel-footer without-padding without-border">
+
+            </div>
+
+        </section>
+
+    </article>
+{% endblock %}

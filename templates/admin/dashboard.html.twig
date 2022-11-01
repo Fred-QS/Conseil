@@ -1,5 +1,33 @@
 {% extends '@EasyAdmin/page/content.html.twig' %}
 
 {% block content %}
-    Dashboard
+
+    <article class="content">
+        <section class="content-header deport-search">
+            <div class="content-header-title">
+                <h4 style="margin: 0;">
+                    {{ 'admin.activity'|trans }}
+                </h4>
+            </div>
+
+            <script>
+                var form = document.querySelector('.deport-search'),
+                    to = document.querySelector('aside .content-search');
+                to.innerHTML = form.innerHTML;
+                var script = to.querySelector('script');
+                to.removeChild(script);
+                form.parentElement.removeChild(form);
+            </script>
+
+        </section>
+
+        <section id="main" class="content-body">
+
+            <div class="content-panel-footer without-padding without-border">
+
+            </div>
+
+        </section>
+
+    </article>
 {% endblock %}

@@ -11,7 +11,10 @@
 		$dropdown = $('.dropdown'),
 		$wrapper = $('#wrapper'),
 		$header = $('#header'),
-		$banner = $('#banner');
+		$banner = $('#banner'),
+		$main = $('#main'),
+		$goDown = $('.button.next.scrolly'),
+		$checkBox = $('.checkbox-container');
 
 	// Breakpoints.
 		breakpoints({
@@ -343,6 +346,22 @@
 			.on('mouseleave', function(event) {
 
 				$(this).find('ul').css({'maxHeight': 0})
+			});
+
+		$goDown
+			.on('click', function(event) {
+				$('html,body').animate({
+					scrollTop: $($main).offset().top
+				}, 600);
+				return false;
+			});
+
+		$checkBox
+			.on('click', function(event) {
+
+				var input = $(this).find('input[type="checkbox"]'),
+					state = $(input).prop('checked');
+				$(input).prop('checked', !state);
 			});
 
 })(jQuery);

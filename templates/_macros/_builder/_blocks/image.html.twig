@@ -1,5 +1,12 @@
 {% macro render(content, position = 'center center') %}
-    <span class="image">
-        <img src="{{ asset('build/' ~ content) }}" alt="{{ content|image_alt }}" data-position="{{ position }}">
-    </span>
+    {% set data = content|json_decode %}
+    {% if data.link is defined and data.link != '' %}
+        <a href="{{ path(data.link) }}" class="image">
+            <img src="{{ asset('build/' ~ data.src) }}" alt="{{ data.src|image_alt }}" data-position="{{ position }}">
+        </a>
+    {% else %}
+        <span class="image">
+            <img src="{{ asset('build/' ~ data.src) }}" alt="{{ data.src|image_alt }}" data-position="{{ position }}">
+        </span>
+    {% endif %}
 {% endmacro %}

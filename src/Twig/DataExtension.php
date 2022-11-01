@@ -3,10 +3,12 @@
 namespace App\Twig;
 
 use Doctrine\ORM\EntityManagerInterface;
+use JsonException;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
 use App\Entity\Identity;
+use Symfony\Component\Yaml\Yaml;
 
 class DataExtension extends AbstractExtension
 {
@@ -17,6 +19,7 @@ class DataExtension extends AbstractExtension
         return [
             new TwigFunction('society_data', [$this, 'societyData']),
             new TwigFunction('ordered_blocks', [$this, 'orderedBlocks']),
+            new TwigFunction('provide_bg', [$this, 'provideBg']),
         ];
     }
 
@@ -24,6 +27,7 @@ class DataExtension extends AbstractExtension
     {
         return [
             new TwigFilter('filtered_text', [$this, 'filteredText']),
+            new TwigFilter('json_decode', [$this, 'jsonDecode']),
         ];
     }
 
@@ -39,25 +43,41 @@ class DataExtension extends AbstractExtension
         return $blocks;
     }
 
-    public function filteredText(string $text): string
+    public function filteredText(array $text): string
     {
-        $calls = [];
-        $title = null;
+        $title = $text['title'];
+        $calls = $text['buttons'];
+        $content = $text['text'];
 
-        $render = $title !== null && $title !== ''
-            ? sprintf('<header class="major"><h2>%s</h2></header>', $title)
+        $render = $title !== ''
+            ? sprintf('<header class="major">%s</header>', $title)
             : null;
 
-        $render .= $text;
+        $render .= $content;
 
         if (!empty($calls)) {
             $render .= '<ul class="actions">';
             foreach ($calls as $call) {
-                $render .= sprintf('<li><a class="button" href="%s">%s</a></li>', $call['href'], $call['text']);
+                $render .= sprintf('<li><a class="button" href="%s">%s</a></li>', $call['href'], $call['name']);
             }
             $render .= '</ul>';
         }
 
         return $render;
+    }
+
+    public function provideBg(string $route): string
+    {
+        $path = dirname(__DIR__, 2).'/data/backgrounds.yaml';
+        $bgs = Yaml::parseFile($path, Yaml::PARSE_CONSTANT);
+        return $bgs[$route] ?? 'home.jpg';
+    }
+
+    /**
+     * @throws JsonException
+     */
+    public function jsonDecode(string $value): array
+    {
+        return \json_decode($value, true, 512, JSON_THROW_ON_ERROR);
     }
 }

@@ -3,19 +3,17 @@
 {% block body %}
     <section>
         <div class="inner">
-            <header class="major">
-                <h1>{{ article.title }}</h1>
-                <small class="article-source-header">
-                    {{ 'label.published'|trans }} {{ app.request.getLocale() == 'fr' ? article.pubDate|date("d/m/Y") : article.pubDate|date("Y/m/d") }} {{ 'label.on'|trans }} {{ article.source|upper }}
-                </small>
-                {% set categories = display_categories(article.category) %}
-                <small class="article-source-header">{{ categories.label|trans }}: {{ categories.data }}</small>
-            </header>
             <span class="image main"><img style="width: 100%;" src="{{ article.imageUrl }}" alt="{{ article.title }}"></span>
-            {% set split = article.content|split_content %}
-            <p>{{ split[0]|raw }}</p>
+            <small class="article-source-header">
+                {{ 'label.published'|trans }} {{ app.request.getLocale() == 'fr' ? article.pubDate|date("d/m/Y") : article.pubDate|date("Y/m/d") }} {{ 'label.on'|trans }} {{ article.source|upper }}
+            </small>
+            {% set categories = display_categories(article.category) %}
+            <small class="article-source-header">{{ categories.label|trans }}: {{ categories.data }}</small>
             <br>
-            <p>{{ split[1]|raw }}</p>
+            {% set split = article.content|split_content %}
+            <p class="article-body">{{ split[0]|raw }}</p>
+            <br>
+            <p class="article-body">{{ split[1]|raw }}</p>
             <small class="article-source">
                 {% if article.creator is defined and article.creator is not same as '' %}
                     {{ 'label.author'|trans }}: {{ article.creator }}

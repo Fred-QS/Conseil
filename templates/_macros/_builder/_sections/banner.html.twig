@@ -1,0 +1,9 @@
+²{% macro render(section) %}
+    <div class="full-banner" id="{{ section.id }}">
+        {% set ordered = ordered_blocks(section.blocks) %}
+        {% for block in ordered %}
+            {% import '_macros/_builder/_blocks/' ~ block.module ~ '.html.twig' as module %}
+            {{ module.render(block.content) }}
+        {% endfor %}
+    </div>
+{% endmacro %}

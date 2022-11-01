@@ -1,7 +1,8 @@
 {% macro render(content) %}
-    <div class="content">
+    {% set data = content|json_decode %}
+    <div class="content{% if data.background != '' %} fullBanner{% endif %}"{% if data.background != '' %} style="background-image: url({{ asset(data.background) }})"{% endif %}>
         <div class="inner">
-            {{ content|filtered_text|raw }}
+            {{ data|filtered_text|raw }}
         </div>
     </div>
 {% endmacro %}

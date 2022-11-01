@@ -87,3 +87,24 @@
 			}
 		}
 	}
+
+	.fullBanner {
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+
+		> .inner {
+			padding: 4em 0 2em 0;
+			margin: 0 auto;
+			max-width: 65em;
+			width: calc(100% - 6em);
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+
+			> * {
+				text-align: center;
+			}
+		}
+	}

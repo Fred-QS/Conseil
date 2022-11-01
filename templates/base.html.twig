@@ -54,13 +54,17 @@
         <!-- Wrapper -->
         <div id="wrapper">
 
-            {{ include('_components/header.html.twig') }}
+            {% if route != 'app_login' %}
+                {{ include('_components/header.html.twig') }}
+            {% endif %}
 
             <div id="main"{{ set_article_main_class(app.request.get('_route')) }} data-controller="{{ set_stimulus(app.request.get('_route')) }}">
                 {% block body %}{% endblock %}
             </div>
 
-            {{ include('_components/footer.html.twig') }}
+            {% if route != 'app_login' %}
+                {{ include('_components/footer.html.twig') }}
+            {% endif %}
 
         </div>
 

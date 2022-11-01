@@ -65,6 +65,7 @@ label:
   published: Publié le
   previous_article: Article précédent
   next_article: Article suivant
+  remember: Se souvenir de moi
 contact:
   subject_first: Premier sujet
   subject_second: Second sujet
@@ -146,3 +147,9 @@ page:
 title:
   hello: Bienvenu
   go: La suite
+admin:
+  users: Utilisateurs
+  subscribers: Abonnés
+  pages: Pages
+  dashboard: Tableau de bord
+  activity: Activité
