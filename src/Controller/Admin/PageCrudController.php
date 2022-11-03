@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Block;
 use App\Repository\BlockRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Yaml\Yaml;
@@ -39,23 +40,29 @@ class PageCrudController extends AbstractController
     }
 
     #[Route('/admin/page', name: 'admin_page')]
-    public function index(): Response
+    public function index( Request $request): Response
     {
+        $mode = $request->get('mode');
+        $page = $request->get('page');
+        if (method_exists($this, $mode)) {
+            return $this->$mode($page);
+        }
         return $this->render('admin/page/index.html.twig', [
             'pages' => $this->pages
         ]);
     }
 
-    #[Route('/admin/page/{page}', name: 'admin_page_show')]
-    public function show(string $page): Response
+    private function edit(string $page): Response
     {
         $selected = $this->getPage($page);
         if ($selected === null) {
             throw $this->createNotFoundException('This page does not exists.');
         }
 
-        dump($selected);
-        return $this->render('admin/page/show.html.twig');
+        $selected['sections'] = $this->blockRepository->findBy(['page' => $page]);
+        return $this->render('admin/page/edit.html.twig', [
+            'page' => $selected
+        ]);
     }
 
     private function getPage(string $page): ?array

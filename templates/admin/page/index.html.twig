@@ -109,10 +109,7 @@
                                                 </svg>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right">
-                                                <a class="dropdown-item action-edit" href="" data-action-name="edit"><span class="action-label">{{ 'admin.edit'|trans }}</span></a>
-
-                                                <a class="dropdown-item action-delete text-danger" href="" data-action-name="delete" formaction="" data-bs-toggle="modal" data-bs-target="#modal-delete"><span class="action-label">{{ 'admin.delete'|trans }}</span></a>
-
+                                                <a class="dropdown-item action-edit" href="/admin?menuIndex=0&routeName=admin_page&submenuIndex=-1&mode=edit&page={{ page.title }}" data-action-name="edit"><span class="action-label">{{ 'admin.edit'|trans }}</span></a>
                                             </div>
                                         </div>
                                     </td>
