@@ -45,14 +45,14 @@ class PageCrudController extends AbstractController
         $mode = $request->get('mode');
         $page = $request->get('page');
         if (method_exists($this, $mode)) {
-            return $this->$mode($page);
+            return $this->$mode($page, $request);
         }
         return $this->render('admin/page/index.html.twig', [
             'pages' => $this->pages
         ]);
     }
 
-    private function edit(string $page): Response
+    private function edit(string $page, Request $request): Response
     {
         $selected = $this->getPage($page);
         if ($selected === null) {
@@ -60,6 +60,11 @@ class PageCrudController extends AbstractController
         }
 
         $selected['sections'] = $this->blockRepository->findBy(['page' => $page]);
+
+        if ($request->isXmlHttpRequest()) {
+            return $this->ajax($request, $selected);
+        }
+
         return $this->render('admin/page/edit.html.twig', [
             'page' => $selected
         ]);
@@ -73,5 +78,12 @@ class PageCrudController extends AbstractController
             }
         }
         return null;
+    }
+
+    private function ajax(Request $request, array $page): Response
+    {
+        return $this->render('_macros/_forms/block.html.twig', [
+            'page' => $page
+        ]);
     }
 }

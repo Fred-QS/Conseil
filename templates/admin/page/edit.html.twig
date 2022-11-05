@@ -39,10 +39,25 @@
             </div>
         </section>
         <section id="main" class="content-body">
-            <div class="content-panel-footer without-padding without-border">
+            <div id="page-custom" class="content-panel-footer without-padding without-border">
                 {{ dump(page) }}
+                <form id="page-custom-form">
+                    <input type="hidden" name="_token" value="{{ csrf_token('page') }}">
+                    <div>
+                        <label>
+                            <span>{{ 'admin.module.background'|trans }}</span>
+                            <input class="d-none image-input" type="file" name="header-background">
+                            <img height="100" src="{{ asset('build/images/page/' ~ page.background) }}" alt="{{ page.title|trans }}">
+                        </label>
+                    </div>
+                    <button class="btn btn-primary" type="submit">{{ 'label.submit'|trans }}</button>
+                </form>
             </div>
         </section>
     </article>
 
 {% endblock %}
+
+{% block body_javascript %}
+    {{ encore_entry_script_tags('admin') }}
+{% endblock body_javascript %}

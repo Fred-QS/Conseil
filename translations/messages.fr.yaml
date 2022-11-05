@@ -159,3 +159,11 @@ admin:
   image: Image
   sections_count: Nbr de sections
   create_page: "Vous devez créer une page dans <b>data/backgrounds.yaml</b> en ajoutant une <b>clé: valeur</b> ou la clé est le <b>nom de la route</b> de votre page et la <b>valeur</b> le nom de <b>l'image du header</b> du template."
+  module:
+    link: Lien
+    alt: Text alternatif
+    src: Image
+    name: Titre
+    background: Image de fond
+    title: Titre
+    text: Contenu

@@ -22,6 +22,7 @@ Encore
      */
     .addEntry('app', './assets/app.js')
     .addStyleEntry('noscript', './assets/styles/noscript.css')
+    .addEntry('admin', './assets/admin.js')
 
     .copyFiles({
         from: './assets/images',
