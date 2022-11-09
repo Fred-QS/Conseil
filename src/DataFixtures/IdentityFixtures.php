@@ -15,9 +15,9 @@ class IdentityFixtures extends Fixture
         $identity->setNameEn('QS Consulting');
         $identity->setSiren('483345211');
         $identity->setSiret('48334521100039');
-        $identity->setAddress('Impasse de l\'ancienne Tuilerie');
-        $identity->setZip('24240');
-        $identity->setCity('Pomport');
+        $identity->setAddress('LD Villac');
+        $identity->setZip('24100');
+        $identity->setCity('Bergerac');
         $identity->setCountry('FRANCE');
         $identity->setApe('6201Z');
         $identity->setPhone('+33662687011');

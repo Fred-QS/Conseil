@@ -1,3 +1,4 @@
+{% set route = app.request.get('_route') %}
 <!DOCTYPE html>
 <html lang="{{ app.request.getLocale() }}_{{ app.request.getLocale()|upper }}">
     <head>
@@ -32,7 +33,6 @@
                 {% if article is defined %}
                     {{ article.title }} - {{ 'site.name'|trans }}
                 {% else %}
-                    {% set route = app.request.get('_route') %}
                     {% if route != 'home' and route != 'index' %}
                         {{ ('route.'~splitter(route))|trans }} - {{ 'site.name'|trans }}
                     {% else %}
