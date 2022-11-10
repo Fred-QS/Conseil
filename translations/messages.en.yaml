@@ -155,6 +155,9 @@ admin:
   activity: Activity
   page: Page
   edit: Edit
+  modify: Modify
+  save: Save changes
+  save_and_continue: Save and continue editing
   delete: Delete
   image: Image
   sections_count: Sections nb

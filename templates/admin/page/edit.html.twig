@@ -34,8 +34,18 @@
         <section class="content-header">
             <div class="content-header-title">
                 <h1 class="title">
-                    {{ 'admin.edit'|trans }} {{ 'admin.page'|trans }}
+                    {{ 'admin.modify'|trans }} {{ 'admin.page'|trans }}
                 </h1>
+            </div>
+            <div class="page-actions">
+                <button class="action-saveAndContinue btn btn-secondary action-save" type="submit" value="saveAndContinue" data-action-name="saveAndContinue" form="page-custom-form">
+                    <span class="btn-label"><i class="action-icon far fa-edit"></i> <span class="action-label">{{ 'admin.save_and_continue'|trans }}</span></span>
+                </button>
+
+                <button class="action-saveAndReturn btn btn-primary action-save" type="submit" value="saveAndReturn" data-action-name="saveAndReturn" form="page-custom-form">
+                    <span class="btn-label"><span class="action-label">{{ 'admin.save'|trans }}</span></span>
+                </button>
+
             </div>
         </section>
         <section id="main" class="content-body">
@@ -43,14 +53,17 @@
                 {{ dump(page) }}
                 <form id="page-custom-form">
                     <input type="hidden" name="_token" value="{{ csrf_token('page') }}">
-                    <div>
-                        <label>
-                            <span>{{ 'admin.module.background'|trans }}</span>
-                            <input class="d-none image-input" type="file" name="header-background">
-                            <img height="100" src="{{ asset('build/images/page/' ~ page.background) }}" alt="{{ page.title|trans }}">
-                        </label>
+                    <div class="col-md-6 col-xxl-5">
+                        <div class="field-text form-group d-flex flex-column">
+                            <label class="form-control-label required">
+                                <span>{{ 'admin.module.background'|trans }}</span>
+                            </label>
+                            <label class="form-widget">
+                                <input class="d-none image-input" type="file" name="header-background">
+                                <img height="100" src="{{ asset('build/images/page/' ~ page.background) }}" alt="{{ page.title|trans }}">
+                            </label>
+                        </div>
                     </div>
-                    <button class="btn btn-primary" type="submit">{{ 'label.submit'|trans }}</button>
                 </form>
             </div>
         </section>
