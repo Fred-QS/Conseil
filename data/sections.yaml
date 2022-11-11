@@ -1,6 +1,8 @@
 -
   title: "full"
   ref: 1
+  dimensions:
+    - 100%
   blocks:
     - {content: null, module: null}
   id: null
@@ -8,6 +10,9 @@
 -
   title: "one-and-two"
   ref: 2
+  dimensions:
+    - 33,33%
+    - 66,66%
   blocks:
     - {content: null, module: null}
     - {content: null, module: null}
@@ -16,6 +21,9 @@
 -
   title: "two-and-one"
   ref: 3
+  dimensions:
+    - 66,66%
+    - 33,33%
   blocks:
     - {content: null, module: null}
     - {content: null, module: null}
@@ -24,6 +32,9 @@
 -
   title: "two-split"
   ref: 4
+  dimensions:
+    - 50%
+    - 50%
   blocks:
     - {content: null, module: null}
     - {content: null, module: null}
@@ -32,6 +43,10 @@
 -
   title: "three-split"
   ref: 5
+  dimensions:
+    - 33,33%
+    - 33,33%
+    - 33,33%
   blocks:
     - {content: null, module: null}
     - {content: null, module: null}
@@ -41,6 +56,8 @@
 -
   title: "banner"
   ref: 6
+  dimensions:
+    - 100%
   blocks:
     - {content: null, module: null}
   id: null

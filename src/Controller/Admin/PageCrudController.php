@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Yaml\Yaml;
+use App\Builder\FormBuilder;
 
 class PageCrudController extends AbstractController
 {
@@ -61,12 +62,15 @@ class PageCrudController extends AbstractController
 
         $selected['sections'] = $this->blockRepository->findBy(['page' => $page]);
 
+        $formBuilder = new FormBuilder();
+        $formated = $formBuilder->setData($selected, $request->getLocale());
+
         if ($request->isXmlHttpRequest()) {
-            return $this->ajax($request, $selected);
+            return $this->ajax($request, $formated);
         }
 
         return $this->render('admin/page/edit.html.twig', [
-            'page' => $selected
+            'page' => $formated
         ]);
     }
 

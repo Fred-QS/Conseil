@@ -1,3 +1,6 @@
+// any CSS you import will output into a single css file (app.css in this case)
+import './styles/sass/layout/_builder.scss';
+
 import $ from 'jquery';
 const page = '#page-custom';
 const url = window.location.href;

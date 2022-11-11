@@ -2,9 +2,11 @@
 
 namespace App\Twig;
 
+use Symfony\Component\Form\Form;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
+use App\Builder\FormBuilder;
 
 class BuilderExtension extends AbstractExtension
 {
@@ -19,13 +21,28 @@ class BuilderExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('build', [$this, 'build']),
+            new TwigFunction('sections_provider', [$this, 'sectionsProvider']),
+            new TwigFunction('section_provider', [$this, 'sectionProvider']),
+            new TwigFunction('modules_provider', [$this, 'modulesProvider']),
         ];
     }
 
-    public function build($value): string
+    public function sectionsProvider(): array
     {
-        return '';
+        $formBuilder = new FormBuilder();
+        return $formBuilder->getSectionsList();
+    }
+
+    public function sectionProvider(int $type): array
+    {
+        $formBuilder = new FormBuilder();
+        return $formBuilder->getSection($type);
+    }
+
+    public function modulesProvider(): array
+    {
+        $formBuilder = new FormBuilder();
+        return $formBuilder->getModulesList();
     }
 
     public function imageAlt(string $value): string

@@ -2,6 +2,10 @@
 
 {% block page_title %}{{ 'admin.edit'|trans }} {{ 'admin.page'|trans }}{% endblock %}
 
+{% block head_custom_stylesheets %}
+    {{ encore_entry_link_tags('admin') }}
+{% endblock %}
+
 {% block content %}
 
     <div class="deport-search" style="display: none;">
@@ -50,10 +54,9 @@
         </section>
         <section id="main" class="content-body">
             <div id="page-custom" class="content-panel-footer without-padding without-border">
-                {{ dump(page) }}
-                <form id="page-custom-form">
+                <form id="page-custom-form" class="container-fluid d-flex flex-wrap">
                     <input type="hidden" name="_token" value="{{ csrf_token('page') }}">
-                    <div class="col-md-6 col-xxl-5">
+                    <div class="col-12">
                         <div class="field-text form-group d-flex flex-column">
                             <label class="form-control-label required">
                                 <span>{{ 'admin.module.background'|trans }}</span>
@@ -62,6 +65,25 @@
                                 <input class="d-none image-input" type="file" name="header-background">
                                 <img height="100" src="{{ asset('build/images/page/' ~ page.background) }}" alt="{{ page.title|trans }}">
                             </label>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <button class="add-section btn btn-primary" type="button"><i class="action-icon fa fa-puzzle-piece"></i> {{ 'admin.create_new_section'|trans }}</button>
+                        <div class="sections-builder">
+                            {% for section in page.sections %}
+                                {% set data = section_provider(section.type) %}
+                                <div class="section-division" data-index="{{ loop.index }}" data-type="{{ section.type }}" data-name="{{ data.name }}">
+                                    {% set cnt = 0 %}
+                                    {% for dimension in data.dimensions %}
+                                        {% set block = section.blocks[cnt] %}
+                                        <div class="block-division" style="width: {{ dimension }}; min-height: 40px">
+                                            <div class="module-division" data-module="{{ block.module }}" style="order: {{ block.order }};"></div>
+                                            {{ dump(block.content) }}
+                                        </div>
+                                        {% set cnt = cnt + 1 %}
+                                    {% endfor %}
+                                </div>
+                            {% endfor %}
                         </div>
                     </div>
                 </form>
