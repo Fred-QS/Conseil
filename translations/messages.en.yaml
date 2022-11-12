@@ -163,6 +163,8 @@ admin:
   sections_count: Sections nb
   create_page: "You have to create a page in <b>data/backgrounds.yaml</b> by adding a <b>key: value</b> where the key is your <b>page route name</b> and where the <b>value</b> is the file's name of the <b>header image</b> of its template."
   create_new_section: Add a new section
+  add_button: Add a CTA
+  list_buttons: CTA list
   module:
     link: Link
     alt: Alternative text

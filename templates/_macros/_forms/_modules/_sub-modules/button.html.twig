@@ -1,0 +1,21 @@
+{% macro render(data, index) %}
+
+    <div class="button-sub-module">
+
+        <div class="field-text form-group">
+            <label class="form-control-label">{{ 'admin.module.name'|trans }}</label>
+            <div class="form-widget">
+                <input type="text" name="{{ index ~ '-button-name' }}" required="required" class="form-control" value="{{ data.name }}">
+            </div>
+        </div>
+
+        <div class="field-text form-group">
+            <label class="form-control-label">{{ 'admin.module.link'|trans }}</label>
+            <div class="form-widget">
+                <input type="text" name="{{ index ~ '-button-href' }}" required="required" class="form-control" value="{{ data.href }}">
+            </div>
+        </div>
+
+    </div>
+
+{% endmacro %}

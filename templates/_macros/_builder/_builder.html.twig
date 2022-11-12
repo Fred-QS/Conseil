@@ -1,8 +1,8 @@
 {% macro builder(page) %}
     <section class="spotlights">
         {% for section in page %}
-            {% import '_macros/_builder/_sections/' ~ section.title as section %}
-            {{ section.render(section) }}
+            {% import '_macros/_builder/_sections/' ~ section.title as s %}
+            {{ s.render(section) }}
         {% endfor %}
     </section>
 {% endmacro %}

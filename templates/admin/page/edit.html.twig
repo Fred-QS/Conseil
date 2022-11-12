@@ -72,13 +72,16 @@
                         <div class="sections-builder">
                             {% for section in page.sections %}
                                 {% set data = section_provider(section.type) %}
-                                <div class="section-division" data-index="{{ loop.index }}" data-type="{{ section.type }}" data-name="{{ data.name }}">
+                                <div class="section-division d-flex flex-wrap" data-index="{{ loop.index }}" data-type="{{ section.type }}" data-name="{{ data.name }}">
                                     {% set cnt = 0 %}
                                     {% for dimension in data.dimensions %}
                                         {% set block = section.blocks[cnt] %}
-                                        <div class="block-division" style="width: {{ dimension }}; min-height: 40px">
-                                            <div class="module-division" data-module="{{ block.module }}" style="order: {{ block.order }};"></div>
-                                            {{ dump(block.content) }}
+                                        {% set content = block.content|json_decode %}
+                                        <div class="block-division p-2" style="width: {{ dimension }}; min-height: 40px">
+                                            <div class="module-division" data-module="{{ block.module }}" style="order: {{ block.order }};">
+                                                {% import '_macros/_forms/_modules/' ~ block.module ~ '.html.twig' as module %}
+                                                {{ module.render(content, cnt) }}
+                                            </div>
                                         </div>
                                         {% set cnt = cnt + 1 %}
                                     {% endfor %}

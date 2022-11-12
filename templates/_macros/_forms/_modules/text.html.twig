@@ -1,0 +1,43 @@
+{% macro render(data, index) %}
+
+    <div class="text-module">
+
+        <div class="field-text form-group d-flex flex-column">
+            <label class="form-control-label required">
+                <span>{{ 'admin.module.background'|trans }}</span>
+            </label>
+            <label class="form-widget">
+                <input class="d-none image-input" type="file" name="{{ index ~ '-text-background' }}" value="{{ data.background }}">
+                <img height="100" src="{% if data.background is not same as '' %}{{ asset('build/' ~ data.background) }}{% else %}{{ asset('build/images/blocks/no-bg.jpg') }}{% endif %}" alt="{{ 'img-' ~ index }}">
+            </label>
+        </div>
+
+        <div class="field-text form-group">
+            <label class="form-control-label">{{ 'admin.module.title'|trans }}</label>
+            <div class="form-widget">
+                <input type="text" name="{{ index ~ '-text-title' }}" required="required" class="form-control" value="{{ data.title }}">
+            </div>
+        </div>
+
+        <div class="field-text form-group">
+            <label class="form-control-label">{{ 'admin.module.text'|trans }}</label>
+            <div class="form-widget">
+                <textarea name="{{ index ~ '-text-text' }}" required="required" class="form-control tinymce">{{ data.text }}</textarea>
+            </div>
+        </div>
+
+        <div class="button-sub-module-container">
+
+            <h4>{{ 'admin.list_buttons'|trans }}</h4>
+
+            <button class="add-button btn btn-primary" type="button"><i class="action-icon fa fa-add"></i> {{ 'admin.add_button'|trans }}</button>
+
+            {% for button in data.buttons %}
+                {% import '_macros/_forms/_modules/_sub-modules/button.html.twig' as b %}
+                {{ b.render(button, loop.index) }}
+            {% endfor %}
+        </div>
+
+    </div>
+
+{% endmacro %}

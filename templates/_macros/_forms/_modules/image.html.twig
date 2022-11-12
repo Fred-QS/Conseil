@@ -1,0 +1,31 @@
+{% macro render(data, index) %}
+
+    <div class="image-module">
+
+        <div class="field-text form-group">
+            <label class="form-control-label">{{ 'admin.module.link'|trans }}</label>
+            <div class="form-widget">
+                <input type="text" name="{{ index ~ '-image-link' }}" required="required" class="form-control" value="{{ data.link }}">
+            </div>
+        </div>
+
+        <div class="field-text form-group d-flex flex-column">
+            <label class="form-control-label required">
+                <span>{{ 'admin.module.src'|trans }}</span>
+            </label>
+            <label class="form-widget">
+                <input class="d-none image-input" type="file" name="{{ index ~ '-image-src' }}" value="{{ data.src }}">
+                <img height="100" src="{% if data.src is not same as '' %}{{ asset('build/' ~ data.src) }}{% else %}{{ asset('build/images/blocks/default.jpg') }}{% endif %}" alt="{{ 'img-' ~ index }}">
+            </label>
+        </div>
+
+        <div class="field-text form-group">
+            <label class="form-control-label required">{{ 'admin.module.alt'|trans }}</label>
+            <div class="form-widget">
+                <input type="text" name="{{ index ~ '-image-alt' }}" required="required" class="form-control" value="{{ data.alt }}">
+            </div>
+        </div>
+
+    </div>
+
+{% endmacro %}

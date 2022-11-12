@@ -52,8 +52,8 @@ class BlockFixtures extends Fixture
                 'sectionOrder' => 3,
                 'blockOrder' => 1,
                 'page' => 'home',
-                'contentFr' => '{"background":"build/images/page/home.jpg","title":"<h1>Full</h1>","text":"<p>Test de bloc full</p>","buttons":[]}',
-                'contentEn' => '{"background":"build/images/page/home.jpg","title":"<h1>Full</h1>","text":"<p>Full bloc test</p>","buttons":[]}',
+                'contentFr' => '{"background":"images/page/home.jpg","title":"<h1>Full</h1>","text":"<p>Test de bloc full</p>","buttons":[]}',
+                'contentEn' => '{"background":"images/page/home.jpg","title":"<h1>Full</h1>","text":"<p>Full bloc test</p>","buttons":[]}',
                 'module' => 'text'
             ],
             [

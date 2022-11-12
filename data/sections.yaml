@@ -11,8 +11,8 @@
   title: "one-and-two"
   ref: 2
   dimensions:
-    - 33,33%
-    - 66,66%
+    - 33.33%
+    - 66.66%
   blocks:
     - {content: null, module: null}
     - {content: null, module: null}
@@ -22,8 +22,8 @@
   title: "two-and-one"
   ref: 3
   dimensions:
-    - 66,66%
-    - 33,33%
+    - 66.66%
+    - 33.33%
   blocks:
     - {content: null, module: null}
     - {content: null, module: null}
@@ -44,9 +44,9 @@
   title: "three-split"
   ref: 5
   dimensions:
-    - 33,33%
-    - 33,33%
-    - 33,33%
+    - 33.33%
+    - 33.33%
+    - 33.33%
   blocks:
     - {content: null, module: null}
     - {content: null, module: null}
