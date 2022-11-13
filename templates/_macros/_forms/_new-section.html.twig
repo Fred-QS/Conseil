@@ -1,0 +1,27 @@
+{% set data = section_provider(section.type) %}
+<div class="section-lister{{ loop.index < 2 ? ' open' : '' }} d-flex justify-content-between align-items-center" data-index="{{ loop.index }}">
+    <p class="m-0 pe-2">Section "{{ data.name|replace({'-':' '})|capitalize }}"</p>
+    <div class="d-flex align-items-center ms-2">
+        <ul class="d-flex m-0 p-0">
+            {% for square in data.dimensions %}
+                <li class="block-square" style="width: {{ square }};"></li>
+            {% endfor %}
+        </ul>
+        <i class="action-icon deploy-section ms-3 fa fa-arrow-alt-circle-down"></i>
+        <i data-index="{{ loop.index }}" class="action-icon delete-section text-danger ms-3 fa fa-xmark-circle"></i>
+    </div>
+</div>
+<div class="section-division d-flex flex-wrap col-12 overflow-hidden" data-index="{{ loop.index }}" data-type="{{ section.type }}" data-name="{{ data.name }}"{{ loop.index > 1 ? ' style="height: 0;"' : '' }}>
+    {% set cnt = 0 %}
+    {% for dimension in data.dimensions %}
+        {% set block = section.blocks[cnt] %}
+        {% set content = block.content|json_decode %}
+        <div class="block-division p-3" style="width: {{ dimension }}; min-height: 40px">
+            <div class="module-division" data-module="{{ block.module }}" style="order: {{ block.order }};">
+                {% import '_macros/_forms/_modules/' ~ block.module ~ '.html.twig' as module %}
+                {{ module.render(content, cnt) }}
+            </div>
+        </div>
+        {% set cnt = cnt + 1 %}
+    {% endfor %}
+</div>

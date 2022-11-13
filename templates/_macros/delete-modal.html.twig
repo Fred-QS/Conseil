@@ -1,0 +1,21 @@
+{% macro render(title, text) %}
+    <div id="modal-delete" class="modal fade" tabindex="-1" style="display: none;" aria-modal="true" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h4>{{ title|trans }} ?</h4>
+                    <p>{{ text|trans }}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-bs-dismiss="modal" class="btn btn-secondary modal-delete-cancel">
+                        <span class="btn-label">{{ 'admin.cancel'|trans }}</span>
+                    </button>
+
+                    <button type="button" data-bs-dismiss="modal" class="btn btn-danger" id="modal-delete-button">
+                        <span class="btn-label">{{ 'admin.delete'|trans }}</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endmacro %}

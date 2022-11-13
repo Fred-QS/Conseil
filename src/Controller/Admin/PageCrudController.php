@@ -86,7 +86,7 @@ class PageCrudController extends AbstractController
 
     private function ajax(Request $request, array $page): Response
     {
-        return $this->render('_macros/_forms/block.html.twig', [
+        return $this->render('_macros/_forms/_new-section.html.twig', [
             'page' => $page
         ]);
     }

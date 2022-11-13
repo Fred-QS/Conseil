@@ -165,6 +165,9 @@ admin:
   create_new_section: Ajouter une nouvelle section
   add_button: Ajouter un CTA
   list_buttons: Liste des CTA
+  cancel: Annuler
+  delete_section: Voulez-vous supprimer cette section
+  delete_action: Cette action est irréversible.
   module:
     link: Lien
     alt: Text alternatif

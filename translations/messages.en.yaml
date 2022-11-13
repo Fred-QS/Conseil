@@ -165,6 +165,9 @@ admin:
   create_new_section: Add a new section
   add_button: Add a CTA
   list_buttons: CTA list
+  cancel: Cancel
+  delete_section: Do you really want to delete this section
+  delete_action: There is no undo for this operation.
   module:
     link: Link
     alt: Alternative text

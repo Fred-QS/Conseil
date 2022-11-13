@@ -8,31 +8,7 @@
 
 {% block content %}
 
-    <div class="deport-search" style="display: none;">
-        <form class="form-action-search" method="get">
-            <input type="hidden" name="routeName" value="admin_page">
-            <input type="hidden" name="menuIndex" value="0">
-            <input type="hidden" name="submenuIndex" value="-1">
-            <div class="form-group">
-                <div class="form-widget">
-                    <i class="fas fa-search content-search-icon"></i>
-
-                    <label class="content-search-label" data-value="">
-                        <input class="form-control is-blank" type="search" name="query" value="" placeholder="{{ 'label.search.submit'|trans }}" spellcheck="false" autocorrect="off" oninput="this.parentNode.dataset.value=this.value">
-                    </label>
-
-                </div>
-            </div>
-        </form>
-        <script>
-            var form = document.querySelector('.deport-search'),
-                to = document.querySelector('aside .content-search');
-            to.innerHTML = form.innerHTML;
-            var script = to.querySelector('script');
-            to.removeChild(script);
-            form.parentElement.removeChild(form);
-        </script>
-    </div>
+    {% include '_macros/deport-search.html.twig' %}
 
     <article class="content">
         <section class="content-header">
@@ -56,7 +32,7 @@
             <div id="page-custom" class="content-panel-footer without-padding without-border">
                 <form id="page-custom-form" class="container-fluid d-flex flex-wrap">
                     <input type="hidden" name="_token" value="{{ csrf_token('page') }}">
-                    <div class="col-12">
+                    <div>
                         <div class="field-text form-group d-flex flex-column">
                             <label class="form-control-label required">
                                 <span>{{ 'admin.module.background'|trans }}</span>
@@ -67,25 +43,11 @@
                             </label>
                         </div>
                     </div>
-                    <div class="col-12">
+                    <div class="col-12 d-flex flex-column justify-content-start align-items-start">
                         <button class="add-section btn btn-primary" type="button"><i class="action-icon fa fa-puzzle-piece"></i> {{ 'admin.create_new_section'|trans }}</button>
-                        <div class="sections-builder">
+                        <div class="sections-builder col-12 d-flex flex-column justify-content-start align-items-start">
                             {% for section in page.sections %}
-                                {% set data = section_provider(section.type) %}
-                                <div class="section-division d-flex flex-wrap" data-index="{{ loop.index }}" data-type="{{ section.type }}" data-name="{{ data.name }}">
-                                    {% set cnt = 0 %}
-                                    {% for dimension in data.dimensions %}
-                                        {% set block = section.blocks[cnt] %}
-                                        {% set content = block.content|json_decode %}
-                                        <div class="block-division p-2" style="width: {{ dimension }}; min-height: 40px">
-                                            <div class="module-division" data-module="{{ block.module }}" style="order: {{ block.order }};">
-                                                {% import '_macros/_forms/_modules/' ~ block.module ~ '.html.twig' as module %}
-                                                {{ module.render(content, cnt) }}
-                                            </div>
-                                        </div>
-                                        {% set cnt = cnt + 1 %}
-                                    {% endfor %}
-                                </div>
+                                {% include '_macros/_forms/_new-section.html.twig' %}
                             {% endfor %}
                         </div>
                     </div>
@@ -93,6 +55,9 @@
             </div>
         </section>
     </article>
+
+    {% import '_macros/delete-modal.html.twig' as delete_modal %}
+    {{ delete_modal.render('admin.delete_section', 'admin.delete_action') }}
 
 {% endblock %}
 

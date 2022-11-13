@@ -14,13 +14,51 @@
 
       .section-division {
 
-          padding: 20px;
           margin-bottom: 20px;
           border-radius: 6px;
           box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.7);
+          background-color: #191919;
+          transition: height linear 0.2s;
+      }
 
-          &:nth-child(odd) {
-              background-color: #191919;
+      .section-lister {
+
+          margin: 0 0 10px 0;
+          box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.5);
+          padding: 5px;
+          border-radius: 4px;
+          background-color: #141414;
+          border: 1px solid #3C3C3C;
+          font-weight: bold;
+          transition: all linear 0.2s;
+
+          &:hover, &.open {
+              background-color: #2D2D2D;
           }
+
+          ul {
+              background-color: #fff;
+              width: 100px;
+              border-radius: 4px;
+          }
+
+          li {
+              list-style: none;
+              margin: 3px;
+              background-color: #191919;
+              border-radius: 4px;
+              height: 20px;
+          }
+      }
+
+      .action-icon {
+          transform-origin: 50% 50%;
+          transform: rotate(0deg);
+          transition: all linear 0.2s;
+          cursor: pointer;
+      }
+
+      .open .action-icon:not(.delete-section) {
+          transform: rotate(180deg);
       }
   }
