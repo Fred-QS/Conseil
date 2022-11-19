@@ -17,6 +17,7 @@ let sectionToDelete = null;
 $(document).ready(function() {
     setImagePreviewer();
     setSectionEvents();
+    setWysiwyg();
 });
 
 function setSectionEvents() {
@@ -114,4 +115,11 @@ function setImagePreviewer() {
             reader.readAsDataURL(file);
         }
     })
+}
+
+function setWysiwyg() {
+    tinymce.init({
+        selector: '.tinymce',
+        statusbar: false
+    });
 }

@@ -61,4 +61,27 @@
       .open .action-icon:not(.delete-section) {
           transform: rotate(180deg);
       }
+
+      .tinymce {
+          min-height: 400px;
+          color: transparent;
+          border-radius: 10px;
+          background-color: #191919;
+      }
+
+      .tox-editor-header {
+          background-color: transparent!important;
+          color: #fff;
+
+          * {
+              background-color: transparent!important;
+              color: #fff;
+
+              svg {
+                  path {
+                      fill: #fff;
+                  }
+              }
+          }
+      }
   }
